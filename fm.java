@@ -14,6 +14,8 @@ import java.net.URI;
 import java.util.TreeMap;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class fm {
 	static JFrame frm;
@@ -24,7 +26,12 @@ public class fm {
 	static JComboBox<String> set1;
 	static JTextArea cod1;
 	static com comPointer;
-	static JTextField[] SET;
+	//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
+	static JTextField set2;
+	static JSlider set3,set4,set5,set6;
+	static JComboBox<String> set7,set8;
+	static JSlider set9,set10,set11,set12;
+	static JComponent[] SET;
 	fm(){
 		com=new TreeMap<String,com>();//僅提供查詢組件的功能
 		comPointer=null;
@@ -35,7 +42,7 @@ public class fm {
 		Dimension sc=kit.getScreenSize();
 		frm.setBounds(0,0,sc.width,sc.height-screenInsets.bottom);
 		frm.setResizable(false);
-		frm.setTitle("JFrameMaker++ 正體版 - 內測版1.0.1");
+		frm.setTitle("JFrameMaker++ 正體版 - 內測版1.0.2");
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frm.setLayout(null);
 		frm.setUndecorated(true);
@@ -46,7 +53,7 @@ public class fm {
 		Title.setBackground(new Color(245,245,245));//標題欄顏色
 		Title.setLayout(null);
 		//============================
-		JLabel title=new JLabel("JFrameMaker++ 正體版 - 內測版1.0.1");
+		JLabel title=new JLabel("JFrameMaker++ 正體版 - 內測版1.0.2");
 		title.setFont(new Font("宋体",0,20));
 		title.setBounds(10,5,380,30);
 		Title.add(title);
@@ -94,7 +101,8 @@ public class fm {
 		conPanel.add(con3);
 		conPanel.add(new JLabel());
 		final JLabel con4=new JLabel("=======單擊此處以獲取更多資訊=======",JLabel.CENTER);
-		con4.setFont(new Font("Serif",0,15));con4.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		con4.setFont(new Font("Serif",0,15));
+		con4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		conPanel.add(con4);
 		conPanel.add(new JLabel("Copyright © 2015-2016(民國百十四-民國百十五)",JLabel.CENTER));
 		conPanel.add(new JLabel("WangYixin's Original Software.",JLabel.CENTER));
@@ -129,201 +137,180 @@ public class fm {
 		    }
 		});
 		//============================
+		
 		setPanel=new JPanel();
 		setPanel.setLayout(new GridLayout(24,1,0,0));
-		SET=new JTextField[11];
+		JScrollPane setPane=new JScrollPane(setPanel);
+		setPane.getVerticalScrollBar().setUnitIncrement(17);
 		set1=new JComboBox<String>();
 		set1.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent e){
 				if(e.getStateChange() == ItemEvent.SELECTED){
 					if(set1.getSelectedItem().toString()!=null){
 						comPointer=com.get(set1.getSelectedItem().toString().split(" ")[1]);
-						String[] str=comPointer.get();
+						Object[] data=comPointer.get();
+						set2.setText(data[0]+"");
+						set3.setValue((int)data[1]);
+						set4.setValue((int)data[2]);
+						set5.setValue((int)data[3]);
+						set6.setValue((int)data[4]);
+						set7.setSelectedItem(data[5]);
+						set8.setSelectedIndex((int) data[6]);
+						set9.setValue((int) data[7]);
+						set10.setValue((int) data[8]);
+						set11.setValue((int) data[9]);
+						set12.setValue((int) data[10]);
 						for(int i=0;i<SET.length;i++){
-					    	SET[i].setText(str[i]);
 					    	SET[i].setEnabled(true);
 					    }
 					}
 				}
 			}
 		});
+		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 		setPanel.add(set1);
-		String[] SETstr="文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍".split(" ");
-	    for(int i=0;i<SET.length;i++){
-	    	SET[i]=new JTextField();
+		
+		set2=new JTextField();
+		set3=new JSlider(0,300-20,0);
+		set4=new JSlider(0,200-20,0);
+		set5=new JSlider(20,300-20,150);
+		set6=new JSlider(20,200-20,30);
+		set7=new JComboBox<String>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
+		set8=new JComboBox<String>(new String[]{"一般","加粗","傾斜","加粗且傾斜"});
+		set9=new JSlider(0,22,12);
+		set10=new JSlider(0,255,0);
+		set11=new JSlider(0,255,0);
+		set12=new JSlider(0,255,0);
+	    
+		SET=new JComponent[]{set2,set3,set4,set5,set6,set7,set8,set9,set10,set11,set12};
+		String[] items="文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍".split(" ");
+		for(int i=0;i<SET.length;i++){
 	    	SET[i].setEnabled(false);
-	    	setPanel.add(new JLabel(SETstr[i]));
+	    	setPanel.add(new JLabel(items[i]));
 			setPanel.add(SET[i]);
 	    }
-	   SET[0].addKeyListener(new KeyAdapter(){
+		
+		set2.addKeyListener(new KeyAdapter(){
 		    public void keyReleased(KeyEvent e) {
-		    	comPointer.setText(SET[0].getText());
+		    	comPointer.setText(set2.getText());
 		    }
 	    });
-	   SET[1].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					int X=new Integer("0"+SET[1].getText());
-					if(X>f.getWidth()-40){
-						SET[1].setText(""+(f.getWidth()-40));
-						X=f.getWidth()-40;
-					}
-					comPointer.c.setLocation(X,comPointer.c.getY());
-				}else{e.consume();}
+		
+		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
+		set3.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setLocation(set3.getValue(),comPointer.c.getY());
+				set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
 			}
 		});
-	   SET[2].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					int Y=new Integer("0"+SET[2].getText());
-					if(Y>f.getHeight()-40){
-						SET[2].setText(""+(f.getHeight()-40));
-						Y=f.getHeight()-40;
-					}
-					comPointer.c.setLocation(comPointer.c.getX(),Y);
-				}else{e.consume();}
+		set3.setPaintTicks(true);
+		set3.setMajorTickSpacing(100);
+		set3.setMinorTickSpacing(10);
+		set3.setPaintLabels(true);
+		
+		set4.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setLocation(comPointer.c.getX(),set4.getValue());
+				set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
 			}
 		});
-	   SET[3].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					int W=new Integer("0"+SET[3].getText());
-					if(W<6){
-						W=6;
-					}
-					comPointer.c.setSize(W, comPointer.c.getHeight());
-				}else{e.consume();}
+		set4.setPaintTicks(true);
+		set4.setMajorTickSpacing(100);
+		set4.setMinorTickSpacing(10);
+		set4.setPaintLabels(true);
+		
+		set5.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setSize(set5.getValue(), comPointer.c.getHeight());
 			}
 		});
-	   SET[4].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					int H=new Integer("0"+SET[4].getText());
-					if(H<6){
-						H=6;
-					}
-					comPointer.c.setSize(comPointer.c.getWidth(),H);
-				}else{e.consume();}
+		set5.setPaintTicks(true);
+		set5.setMajorTickSpacing(100);
+		set5.setMinorTickSpacing(10);
+		set5.setPaintLabels(true);
+		
+		set6.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setSize(comPointer.c.getWidth(),set6.getValue());
+				int pt=comPointer.c.getHeight()*72/96;
+				if(pt>=100){
+					set9.setMajorTickSpacing(100);
+					set9.setMinorTickSpacing(10);
+				}else{
+					set9.setMajorTickSpacing(10);
+					set9.setMinorTickSpacing(1);
+				}
+				set9.setMaximum(pt);
 			}
 		});
-	   SET[5].addKeyListener(new KeyAdapter(){
-		    public void keyReleased(KeyEvent e) {
-		    	comPointer.c.setFont(new Font(SET[5].getText(),
-		    			comPointer.c.getFont().getStyle(),comPointer.c.getFont().getSize()));
-		    }
-	    });
-	   SET[6].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					comPointer.c.setFont(new Font(comPointer.c.getFont().getFontName(),
-							new Integer("0"+SET[6].getText()),comPointer.c.getFont().getSize()));
-				}else{e.consume();}
+		set6.setPaintTicks(true);
+		set6.setMajorTickSpacing(100);
+		set6.setMinorTickSpacing(10);
+		set6.setPaintLabels(true);
+		
+		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
+		set7.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent e){
+				if(e.getStateChange() == ItemEvent.SELECTED){
+					comPointer.c.setFont(new Font(set7.getSelectedItem().toString()
+							,comPointer.c.getFont().getStyle(),comPointer.c.getFont().getSize()));
+				}
 			}
 		});
-	   SET[7].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					comPointer.c.setFont(new Font(comPointer.c.getFont().getFontName(),
-							comPointer.c.getFont().getStyle(),new Integer("0"+SET[7].getText())));
-				}else{e.consume();}
+		
+		set8.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent e){
+				if(e.getStateChange() == ItemEvent.SELECTED){
+					comPointer.c.setFont(new Font(comPointer.c.getFont().getFontName()
+							,set8.getSelectedIndex(),comPointer.c.getFont().getSize()));
+				}
 			}
 		});
-	   SET[8].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					int Red=new Integer("0"+SET[8].getText());
-					if(Red>=255){
-						SET[8].setText("255");
-						Red=255;
-					}
-					int Blue=new Integer("0"+SET[9].getText());
-					int Green=new Integer("0"+SET[10].getText());
-					comPointer.c.setForeground(new Color(Red,Blue,Green));
-				}else{e.consume();}
+		
+		set9.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setFont(new Font(comPointer.c.getFont().getFontName()
+						,comPointer.c.getFont().getStyle(),set9.getValue()));
 			}
 		});
-	   SET[9].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					int Blue=new Integer("0"+SET[9].getText());
-					if(Blue>=255){
-						SET[9].setText("255");
-						Blue=255;
-					}
-					int Red=new Integer("0"+SET[8].getText());
-					int Green=new Integer("0"+SET[10].getText());
-					comPointer.c.setForeground(new Color(Red,Blue,Green));
-				}else{e.consume();}
+		set9.setPaintTicks(true);
+		set9.setMajorTickSpacing(10);
+		set9.setMinorTickSpacing(1);
+		set9.setPaintLabels(true);
+		
+		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
+		set10.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setForeground(new Color(set10.getValue()
+						,comPointer.c.getForeground().getGreen(),comPointer.c.getForeground().getBlue()));
 			}
 		});
-	   SET[10].addKeyListener(new KeyAdapter(){
-	    	public void keyTyped(KeyEvent e) {
-	    		int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-				}else{e.consume();}
-	    	}
-			public void keyReleased(KeyEvent e) {
-				int keyChar=e.getKeyChar();	
-				if(keyChar>=KeyEvent.VK_0&&keyChar<=KeyEvent.VK_9||keyChar=='\b'){
-					int Green=new Integer("0"+SET[10].getText());
-					if(Green>=255){
-						SET[10].setText("255");
-						Green=255;
-					}
-					int Red=new Integer("0"+SET[8].getText());
-					int Blue=new Integer("0"+SET[9].getText());
-					comPointer.c.setForeground(new Color(Red,Blue,Green));
-				}else{e.consume();}
+		set10.setPaintTicks(true);
+		set10.setMajorTickSpacing(51);
+		set10.setMinorTickSpacing(17);
+		set10.setPaintLabels(true);
+		
+		set11.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setForeground(new Color(comPointer.c.getForeground().getRed()
+						,set11.getValue(),comPointer.c.getForeground().getBlue()));
 			}
 		});
+		set11.setPaintTicks(true);
+		set11.setMajorTickSpacing(51);
+		set11.setMinorTickSpacing(17);
+		set11.setPaintLabels(true);
+		
+		set12.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				comPointer.c.setForeground(new Color(comPointer.c.getForeground().getRed()
+						,comPointer.c.getForeground().getGreen(),set12.getValue()));
+			}
+		});
+		set12.setPaintTicks(true);
+		set12.setMajorTickSpacing(51);
+		set12.setMinorTickSpacing(17);
+		set12.setPaintLabels(true);
 		//============================
 		codPanel=new JPanel();
 		codPanel.setLayout(null);
@@ -362,7 +349,7 @@ public class fm {
 		final CardLayout card=new CardLayout();
 		Tools.setLayout(card);
 		Tools.add("con", conPanel);
-		Tools.add("set", setPanel);
+		Tools.add("set", setPane);
 		Tools.add("cod", codPanel);
 		frm.add(Tools);
 		//============================
@@ -404,7 +391,7 @@ public class fm {
 		//============================
 		final JLabel conButton=new JLabel("添加組件",JLabel.CENTER);
 		final JLabel setButton=new JLabel("設置組件",JLabel.CENTER);
-		final JLabel codButton=new JLabel("查看代碼",JLabel.CENTER);
+		final JLabel codButton=new JLabel("檢視代碼",JLabel.CENTER);
 		//============================
 		conButton.setFont(new Font("宋体",0,15));
 		conButton.setOpaque(true);
@@ -415,7 +402,7 @@ public class fm {
 				conButton.setBackground(null);//按鈕顏色
 				setButton.setBackground(new Color(245,245,245));//按鈕顏色
 				codButton.setBackground(new Color(245,245,245));//按鈕顏色
-				codButton.setText("查看代碼");
+				codButton.setText("檢視代碼");
 				card.show(Tools, "con");
 			}
 			public void mouseEntered(MouseEvent e) {
@@ -442,7 +429,7 @@ public class fm {
 				setButton.setBackground(null);//按鈕顏色
 				conButton.setBackground(new Color(245,245,245));//按鈕顏色
 				codButton.setBackground(new Color(245,245,245));//按鈕顏色
-				codButton.setText("查看代碼");
+				codButton.setText("檢視代碼");
 				card.show(Tools, "set");
 			}
 			public void mouseEntered(MouseEvent e) {
@@ -469,7 +456,7 @@ public class fm {
 				codButton.setBackground(null);//按鈕顏色
 				conButton.setBackground(new Color(245,245,245));//按鈕顏色
 				setButton.setBackground(new Color(245,245,245));//按鈕顏色
-				codButton.setText("刷新代碼");
+				codButton.setText("整理代碼");
 				cod1.setText("JFrame jf=new JFrame(\""+f.getTitle()+"\");\n" +
 						"jf.setDefaultCloseOperation(3);\ntry{\n    UIManager.setLookAndFeel" +
 						"(UIManager.getSystemLookAndFeelClassName());" +
@@ -511,6 +498,12 @@ public class fm {
 		    public void componentMoved(ComponentEvent e) {
 		    	f.setLocation(30, 30);
 		    }
+		    public void componentResized(ComponentEvent e) {
+		    	set3.setMaximum(f.getWidth()-20);
+				set4.setMaximum(f.getHeight()-20);
+				set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
+				set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
+		    }
 		});
 		f.addMouseListener(new MouseAdapter() {
 		    public void mouseReleased(MouseEvent e) {
@@ -525,5 +518,4 @@ public class fm {
 		    }
 		});
 	}
-
 }
