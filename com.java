@@ -44,10 +44,10 @@ public class com {
 					f.setCursor(Cursor.getPredefinedCursor(13));
 				}
 				if(fm.comPointer.name==name){
-					fm.SET[1].setText(c.getX()+"");
-					fm.SET[2].setText(c.getY()+"");
-					fm.SET[3].setText(c.getWidth()+"");
-					fm.SET[4].setText(c.getHeight()+"");
+					fm.set3.setValue(c.getX());
+					fm.set4.setValue(c.getY());
+					fm.set5.setValue(c.getWidth());
+					fm.set6.setValue(c.getHeight());
 				}
 			}
 		    public void mouseReleased(MouseEvent e) {
@@ -84,11 +84,11 @@ public class com {
      * 獲取組件的各種屬性
      * @return 文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
      */
-	public String[] get(){
-		String[] str={getText(),c.getX()+"",c.getY()+"",c.getWidth()+"",c.getHeight()+"",
-				c.getFont().getFontName(),c.getFont().getStyle()+"",c.getFont().getSize()+"",
-				c.getForeground().getRed()+"",c.getForeground().getGreen()+"",c.getForeground().getBlue()+""};
-		return str;
+	public Object[] get(){
+		Object[] data={getText(),c.getX(),c.getY(),c.getWidth(),c.getHeight(),
+				c.getFont().getFontName(),c.getFont().getStyle(),c.getFont().getSize(),
+				c.getForeground().getRed(),c.getForeground().getGreen(),c.getForeground().getBlue()};
+		return data;
 	}
 	private String getText(){
 		String text = null;
@@ -118,15 +118,26 @@ public class com {
 				"new Color("+c.getForeground().getRed()+","+c.getForeground().getGreen()+","+c.getForeground().getBlue()+"));\n";
 		return str;
 	}
+	//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 	public void destory(){
 		c.setVisible(false);
 		fm.com.remove(name);
 		fm.set1.removeItem(kind+" "+name);
 		if(fm.set1.getItemCount()==0){
 			for(int i=0;i<fm.SET.length;i++){
-		    	fm.SET[i].setText(null);
 		    	fm.SET[i].setEnabled(false);
 		    }
+			fm.set2.setText(null);
+	    	fm.set3.setValue(0);
+	    	fm.set4.setValue(0);
+	    	fm.set5.setValue(0);
+	    	fm.set6.setValue(0);
+	    	fm.set7.setSelectedIndex(0);
+	    	fm.set8.setSelectedIndex(0);
+	    	fm.set9.setValue(0);
+	    	fm.set10.setValue(0);
+	    	fm.set11.setValue(0);
+	    	fm.set12.setValue(0);
 			fm.comPointer=null;
 		}
 	}
