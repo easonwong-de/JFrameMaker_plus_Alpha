@@ -138,7 +138,7 @@ public class com {
 	    	fm.set10.setValue(0);
 	    	fm.set11.setValue(0);
 	    	fm.set12.setValue(0);
-			fm.comPointer=null;
+		fm.comPointer=null;
 		}
 	}
 }
