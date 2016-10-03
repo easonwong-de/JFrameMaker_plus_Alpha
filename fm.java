@@ -5,8 +5,10 @@ import java.io.*;
 import java.net.URI;
 import java.util.TreeMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.filechooser.FileSystemView;
 
 public class fm {
 	static JFrame frm;
@@ -34,11 +36,23 @@ public class fm {
 		{new Color(100,100,100),Color.WHITE,new Color(130,130,130),Color.LIGHT_GRAY,new Color(170,170,170)}
 		};
 	static final String[][] langus={
-		{},
-		{}
+		{"JFrameMaker++ 內測版1.0.2","按鈕","標籤","文本框","文本域","複選欄"/*5*/
+			,"   好的   ","訊息","組件名稱","添加組件","組件的名字不可為空","組件的名稱有重複"/*11*/
+			,"=======單擊此處以獲取更多資訊=======","訪問失敗","一般","加粗","傾斜","加粗且傾斜"/*17*/
+			,"文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍","拷貝代碼","已拷貝到您的剪貼板"/*20*/
+			,"設定","隱藏","離開","添加組件","設定組件","檢視代碼","整理代碼","設定語言","設定質感","設定JFrame標題"/*30*/
+			,"經典淺色","現代深色","保存設定","  取消  "/*34*/
+			,"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？"},
+		{"JFrameMaker++ Alpha1.0.2","JButton","JLabel","JTextField","JTextArea","JCheckBox"
+			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","Duplicate component name"
+			,"======Click here for more Information======","Access Failed","General","Bold","Italic","Bold both Italic"
+			,"Text Abscissa Ordinate Width Height Font_Name Font_Style Font_Size Red Green Blue","Copy the code","Copied to your clipboard"
+			,"Set","Hide","Leave","Add","Setting","See code","Refresh","Language","Feeling","JFrame's title"
+			,"Classical light","Modren Deep","Save changes","  Cancle  "
+			,"To save your settings, you need to restart JFrameMaker++. \nAre you sure you want to log out temporarily?"}
 		};
 	
-	fm(){
+	fm() throws Exception{
 		com=new TreeMap<String,com>();//僅提供查詢組件的功能
 		comPointer=null;
 		//============================
@@ -48,10 +62,11 @@ public class fm {
 		Dimension sc=kit.getScreenSize();
 		frm.setBounds(0,0,sc.width,sc.height-screenInsets.bottom);
 		frm.setResizable(false);
-		frm.setTitle("JFrameMaker++ 內測版1.0.2");
+		frm.setTitle(langus[languChooser][0]);
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frm.setLayout(null);
 		frm.setUndecorated(true);
+		frm.setIconImage(ImageIO.read(this.getClass().getResource("/data/ICO.png")));
 		//============================
 		Title=new JPanel();
 		Title.setBounds(0,0,frm.getWidth(),45);
@@ -59,7 +74,7 @@ public class fm {
 		Title.setBackground(colors[colorChooser][0]);//標題欄顏色
 		Title.setLayout(null);
 		//============================
-		JLabel title=new JLabel("JFrameMaker++ 內測版1.0.2");
+		JLabel title=new JLabel(langus[languChooser][0]);
 		title.setFont(new Font("宋体",0,20));
 		title.setForeground(colors[colorChooser][1]);
 		title.setBounds(10,5,380,30);
@@ -67,13 +82,14 @@ public class fm {
 		//============================
 		conPanel=new JPanel();
 		conPanel.setLayout(new GridLayout(20,1,5,5));
-		String[] comp=new String[]{"JButton按鈕","JLabel標籤","JTextField文本框","JTextArea文本域","JCheckBox複選欄"};
+		String[] comp=new String[]{langus[languChooser][1],langus[languChooser][2]
+				,langus[languChooser][3],langus[languChooser][4],langus[languChooser][5]};
 		final JComboBox<String> con1=new JComboBox<String>(comp);
 		conPanel.add(con1);
-		conPanel.add(new JLabel("組件名稱"));
+		conPanel.add(new JLabel(langus[languChooser][8]));
 		final JTextField con2=new JTextField();
 		conPanel.add(con2);
-		final JButton con3=new JButton("添加組件");
+		final JButton con3=new JButton(langus[languChooser][9]);
 		con3.setOpaque(false);
 		con3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -93,22 +109,22 @@ public class fm {
 						}
 						con2.setText(null);
 					}else{
-						Object[] options = {"   好的   "};
+						Object[] options = {langus[languChooser][6]};
 						JOptionPane.showOptionDialog(null,
-						"組件的名字不可為空",
-						"訊息",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
+								langus[languChooser][10],
+						langus[languChooser][7],JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
 					}
 				}else{
-					Object[] options = {"   好的   "};
+					Object[] options = {langus[languChooser][6]};
 					JOptionPane.showOptionDialog(null,
-					"組件的名稱有重複",
-					"訊息",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
+					langus[languChooser][11],
+					langus[languChooser][7],JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
 				}
 			}
 		});
 		conPanel.add(con3);
 		conPanel.add(new JLabel());
-		final JLabel con4=new JLabel("=======單擊此處以獲取更多資訊=======",JLabel.CENTER);
+		final JLabel con4=new JLabel(langus[languChooser][12],JLabel.CENTER);
 		con4.setFont(new Font("Serif",0,15));
 		con4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		conPanel.add(con4);
@@ -123,17 +139,17 @@ public class fm {
 					if(Desktop.isDesktopSupported()&&dtp.isSupported(Desktop.Action.BROWSE)){
 						dtp.browse(uri);
 					}else{
-						Object[] options = {"好的"};
+						Object[] options = {langus[languChooser][6]};
 						JOptionPane.showOptionDialog(null,
-						"訪問失敗",
-						"錯誤",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
+						langus[languChooser][13],
+						langus[languChooser][7],JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
 						null,options,options[0]);
 					}
 				}catch(Exception E){
-					Object[] options = {"好的"};
+					Object[] options = {langus[languChooser][6]};
 					JOptionPane.showOptionDialog(null,
-					"訪問失敗",
-					"錯誤",JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
+					langus[languChooser][13],
+					langus[languChooser][7],JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,
 					null,options,options[0]);
 				}
 			}
@@ -184,19 +200,20 @@ public class fm {
 		set5=new JSlider(20,300-20,150);
 		set6=new JSlider(20,200-20,30);
 		set7=new JComboBox<String>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-		set8=new JComboBox<String>(new String[]{"一般","加粗","傾斜","加粗且傾斜"});
+		set8=new JComboBox<String>(new String[]{langus[languChooser][14],langus[languChooser][15]
+				,langus[languChooser][16],langus[languChooser][17]});
 		set9=new JSlider(0,22,12);
 		set10=new JSlider(0,255,0);
 		set11=new JSlider(0,255,0);
 		set12=new JSlider(0,255,0);
 	    
 		SET=new JComponent[]{set2,set3,set4,set5,set6,set7,set8,set9,set10,set11,set12};
-		String[] items="文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍".split(" ");
+		String[] items=langus[languChooser][18].split(" ");
 		for(int i=0;i<SET.length;i++){
 	    	SET[i].setEnabled(false);
 	    	setPanel.add(new JLabel(items[i]));
 			setPanel.add(SET[i]);
-			SET[i].setOpaque(false);
+			if(i!=0)SET[i].setOpaque(false);
 	    }
 		
 		set2.addKeyListener(new KeyAdapter(){
@@ -204,7 +221,6 @@ public class fm {
 		    	comPointer.setText(set2.getText());
 		    }
 	    });
-		set2.setOpaque(true);
 		
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 		set3.addChangeListener(new ChangeListener() {
@@ -344,17 +360,17 @@ public class fm {
 		JScrollPane Sp=new JScrollPane(cod1);
 		cod.add(Sp);
 		codPanel.add(cod);
-		JButton cod2=new JButton("拷貝代碼");
+		JButton cod2=new JButton(langus[languChooser][19]);
 		cod2.setBounds(5,frm.getHeight()-120, 290, 30);
 		codPanel.add(cod2);
 		cod2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				StringSelection stsel = new StringSelection(cod1.getText().replaceAll("    ", "	"));
 				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel, stsel);
-				Object[] options = {"   好的   "};
+				Object[] options = {langus[languChooser][6]};
 				JOptionPane.showOptionDialog(null,
-				"已拷貝到您的剪貼板",
-				"訊息",JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
+				langus[languChooser][20],
+				langus[languChooser][7],JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 				null,options,options[0]);
 			}
 		});
@@ -376,7 +392,7 @@ public class fm {
 		codPanel.setBackground(colors[colorChooser][4]);
 		frm.add(Tools);
 		//============================
-		final JLabel bigSetButton=new JLabel("設定",JLabel.CENTER);
+		final JLabel bigSetButton=new JLabel(langus[languChooser][21],JLabel.CENTER);
 		bigSetButton.setFont(new Font("宋体",0,20));
 		bigSetButton.setOpaque(true);
 		bigSetButton.setBackground(null);//設定按鈕顏色
@@ -396,7 +412,7 @@ public class fm {
 		});
 		Title.add(bigSetButton);
 		//============================
-		final JLabel minButton=new JLabel("隱藏",JLabel.CENTER);
+		final JLabel minButton=new JLabel(langus[languChooser][22],JLabel.CENTER);
 		minButton.setFont(new Font("宋体",0,20));
 		minButton.setOpaque(true);
 		minButton.setBackground(null);//隱藏按鈕顏色
@@ -415,7 +431,7 @@ public class fm {
 		});
 		Title.add(minButton);
 		//============================
-		final JLabel closeButton=new JLabel("離開",JLabel.CENTER);
+		final JLabel closeButton=new JLabel(langus[languChooser][23],JLabel.CENTER);
 		closeButton.setFont(new Font("宋体",0,20));
 		closeButton.setOpaque(true);
 		closeButton.setBackground(null);//離開按鈕顏色
@@ -434,9 +450,9 @@ public class fm {
 		});
 		Title.add(closeButton);
 		//============================
-		final JLabel conButton=new JLabel("添加組件",JLabel.CENTER);
-		final JLabel setButton=new JLabel("設定組件",JLabel.CENTER);
-		final JLabel codButton=new JLabel("檢視代碼",JLabel.CENTER);
+		final JLabel conButton=new JLabel(langus[languChooser][24],JLabel.CENTER);
+		final JLabel setButton=new JLabel(langus[languChooser][25],JLabel.CENTER);
+		final JLabel codButton=new JLabel(langus[languChooser][26],JLabel.CENTER);
 		//============================
 		conButton.setFont(new Font("宋体",0,15));
 		conButton.setOpaque(true);
@@ -448,7 +464,7 @@ public class fm {
 				conButton.setBackground(colors[colorChooser][2]);//按鈕顏色
 				setButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 				codButton.setBackground(colors[colorChooser][0]);//按鈕顏色
-				codButton.setText("檢視代碼");
+				codButton.setText(langus[languChooser][26]);
 				card.show(Tools, "con");
 			}
 			public void mouseEntered(MouseEvent e) {
@@ -476,7 +492,7 @@ public class fm {
 				setButton.setBackground(colors[colorChooser][2]);//按鈕顏色
 				conButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 				codButton.setBackground(colors[colorChooser][0]);//按鈕顏色
-				codButton.setText("檢視代碼");
+				codButton.setText(langus[languChooser][26]);
 				card.show(Tools, "set");
 			}
 			public void mouseEntered(MouseEvent e) {
@@ -504,7 +520,7 @@ public class fm {
 				codButton.setBackground(colors[colorChooser][2]);//按鈕顏色
 				conButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 				setButton.setBackground(colors[colorChooser][0]);//按鈕顏色
-				codButton.setText("整理代碼");
+				codButton.setText(langus[languChooser][27]);
 				String title="";
 				if(f.getTitle()!=null)
 					title=f.getTitle();
@@ -538,13 +554,13 @@ public class fm {
 		frm.setVisible(true);
 	}
 	public static void settings(){
-		setFrame=new JDialog(frm, "設定", true);
-		setFrame.setSize(300,430);
+		setFrame=new JDialog(frm,langus[languChooser][21], true);
+		setFrame.setSize(300,350);
 		setFrame.setResizable(false);
 		setFrame.setLocationRelativeTo(null);
-		setFrame.setLayout(new GridLayout(10,1,5,5));
+		setFrame.setLayout(new GridLayout(8,1,5,5));
 		
-		setFrame.add(new JLabel("設置語言"));
+		setFrame.add(new JLabel(langus[languChooser][28]));
 		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(中國)","English(UK)"});
 		langu.setSelectedIndex(languChooser);
 		setFrame.add(langu);
@@ -556,8 +572,8 @@ public class fm {
 			}
 		});
 		
-		setFrame.add(new JLabel("設置質感"));
-		final JComboBox<String> color=new JComboBox<String>(new String[]{"經典淺色","現代深色"});
+		setFrame.add(new JLabel(langus[languChooser][29]));
+		final JComboBox<String> color=new JComboBox<String>(new String[]{langus[languChooser][31],langus[languChooser][32]});
 		color.setSelectedIndex(colorChooser);
 		setFrame.add(color);
 		color.addItemListener(new ItemListener() {
@@ -568,7 +584,7 @@ public class fm {
 			}
 		});
 		
-		setFrame.add(new JLabel("設置JFrame標題"));
+		setFrame.add(new JLabel(langus[languChooser][30]));
 		final JTextField frameTitle=new JTextField(frameName);
 		frameTitle.getDocument().addDocumentListener(new DocumentListener() {
 			public void removeUpdate(DocumentEvent e) {
@@ -583,24 +599,24 @@ public class fm {
 		});
 		setFrame.add(frameTitle);
 		
-		saveSettings=new JButton("保存設定");
+		saveSettings=new JButton(langus[languChooser][33]);
 		saveSettings.setEnabled(false);
 		setFrame.add(saveSettings);
 		saveSettings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object[] options = {"   好的   ","  取消  "};
+				Object[] options = {langus[languChooser][6],langus[languChooser][34]};
 				if(JOptionPane.showOptionDialog(null,
-						"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？",
-						"訊息",JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
+						langus[languChooser][35],
+						langus[languChooser][7],JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
 						null,options,options[0])==0){
-					File file=new File(fm.class.getResource("/data/settings.txt").getFile());
+					File file=new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"/JFrameMaker/settings.dll");
 					try{
 						BufferedWriter writer=new BufferedWriter(new FileWriter(file,false));
 						writer.write(langu.getSelectedIndex()+"");
 						writer.newLine();
 						writer.write(color.getSelectedIndex()+"");
 						writer.newLine();
-						writer.write(frameTitle.getText());
+						writer.write(frameTitle.getText()+"");
 						writer.close();
 					}catch(Exception e1){
 							e1.printStackTrace();
@@ -614,7 +630,19 @@ public class fm {
 	}
 	public static void main(String[] args) throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		File file=new File(fm.class.getResource("/data/settings.txt").getFile());
+		File dir=new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"/JFrameMaker");
+		File file=new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"/JFrameMaker/settings.dll");
+		if(!file.exists()&&!file.isFile()){
+			if(!dir.exists()&&!dir.isDirectory())dir.mkdir();
+			file.createNewFile();
+			BufferedWriter writer=new BufferedWriter(new FileWriter(file,false));
+			writer.write(0+"");
+			writer.newLine();
+			writer.write(0+"");
+			writer.newLine();
+			writer.write("jf");
+			writer.close();
+		}
 		BufferedReader reader=new BufferedReader(new FileReader(file));
 		languChooser=new Integer(reader.readLine());
 		colorChooser=new Integer(reader.readLine());
