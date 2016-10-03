@@ -81,9 +81,9 @@ public class com {
 		c.setBounds(0,0,150,30);
 	}
 	/**
-     * 獲取組件的各種屬性
-     * @return 文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
-     */
+     	* 獲取組件的各種屬性
+     	* @return 文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
+     	*/
 	public Object[] get(){
 		Object[] data={getText(),c.getX(),c.getY(),c.getWidth(),c.getHeight(),
 				c.getFont().getFontName(),c.getFont().getStyle(),c.getFont().getSize(),
