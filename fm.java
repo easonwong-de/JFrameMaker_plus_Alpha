@@ -1,37 +1,43 @@
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.io.*;
 import java.net.URI;
 import java.util.TreeMap;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.event.*;
 
 public class fm {
 	static JFrame frm;
 	static JPanel Title,Tools,conPanel,setPanel,codPanel;
 	static JDesktopPane desk;
 	static JInternalFrame f;
+	static JDialog setFrame;
 	static TreeMap<String,com> com;
 	static JComboBox<String> set1;
 	static JTextArea cod1;
+	static JButton saveSettings;
 	static com comPointer;
+	static int languChooser,colorChooser;
+	static String frameName;
 	//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 	static JTextField set2;
 	static JSlider set3,set4,set5,set6;
 	static JComboBox<String> set7,set8;
 	static JSlider set9,set10,set11,set12;
 	static JComponent[] SET;
+	
+	//標題欄色，字體色，背景色，選項卡第二字體色，設定窗欄背景色
+	static final Color[][] colors={
+		{new Color(245,245,245),Color.BLACK,new Color(255,255,255),Color.GRAY,new Color(220,220,220)},
+		{new Color(100,100,100),Color.WHITE,new Color(130,130,130),Color.LIGHT_GRAY,new Color(170,170,170)}
+		};
+	static final String[][] langus={
+		{},
+		{}
+		};
+	
 	fm(){
 		com=new TreeMap<String,com>();//僅提供查詢組件的功能
 		comPointer=null;
@@ -42,7 +48,7 @@ public class fm {
 		Dimension sc=kit.getScreenSize();
 		frm.setBounds(0,0,sc.width,sc.height-screenInsets.bottom);
 		frm.setResizable(false);
-		frm.setTitle("JFrameMaker++ 正體版 - 內測版1.0.2");
+		frm.setTitle("JFrameMaker++ 內測版1.0.2");
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frm.setLayout(null);
 		frm.setUndecorated(true);
@@ -50,11 +56,12 @@ public class fm {
 		Title=new JPanel();
 		Title.setBounds(0,0,frm.getWidth(),45);
 		frm.add(Title);
-		Title.setBackground(new Color(245,245,245));//標題欄顏色
+		Title.setBackground(colors[colorChooser][0]);//標題欄顏色
 		Title.setLayout(null);
 		//============================
-		JLabel title=new JLabel("JFrameMaker++ 正體版 - 內測版1.0.2");
+		JLabel title=new JLabel("JFrameMaker++ 內測版1.0.2");
 		title.setFont(new Font("宋体",0,20));
+		title.setForeground(colors[colorChooser][1]);
 		title.setBounds(10,5,380,30);
 		Title.add(title);
 		//============================
@@ -67,6 +74,7 @@ public class fm {
 		final JTextField con2=new JTextField();
 		conPanel.add(con2);
 		final JButton con3=new JButton("添加組件");
+		con3.setOpaque(false);
 		con3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(!com.containsKey(con2.getText())|con2.getText()=="jf"){
@@ -188,6 +196,7 @@ public class fm {
 	    	SET[i].setEnabled(false);
 	    	setPanel.add(new JLabel(items[i]));
 			setPanel.add(SET[i]);
+			SET[i].setOpaque(false);
 	    }
 		
 		set2.addKeyListener(new KeyAdapter(){
@@ -195,12 +204,17 @@ public class fm {
 		    	comPointer.setText(set2.getText());
 		    }
 	    });
+		set2.setOpaque(true);
 		
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 		set3.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				comPointer.c.setLocation(set3.getValue(),comPointer.c.getY());
-				set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
+				if(comPointer!=null){
+					comPointer.c.setLocation(set3.getValue(),comPointer.c.getY());
+					set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
+				}else{
+					set5.setMaximum(f.getWidth()-8);
+				}
 			}
 		});
 		set3.setPaintTicks(true);
@@ -210,8 +224,12 @@ public class fm {
 		
 		set4.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				comPointer.c.setLocation(comPointer.c.getX(),set4.getValue());
-				set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
+				if(comPointer!=null){
+					comPointer.c.setLocation(comPointer.c.getX(),set4.getValue());
+					set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
+				}else{
+					set6.setMaximum(f.getHeight()-8);
+				}
 			}
 		});
 		set4.setPaintTicks(true);
@@ -221,7 +239,8 @@ public class fm {
 		
 		set5.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				comPointer.c.setSize(set5.getValue(), comPointer.c.getHeight());
+				if(comPointer!=null)
+					comPointer.c.setSize(set5.getValue(), comPointer.c.getHeight());
 			}
 		});
 		set5.setPaintTicks(true);
@@ -231,16 +250,18 @@ public class fm {
 		
 		set6.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				comPointer.c.setSize(comPointer.c.getWidth(),set6.getValue());
-				int pt=comPointer.c.getHeight()*72/96;
-				if(pt>=100){
-					set9.setMajorTickSpacing(100);
-					set9.setMinorTickSpacing(10);
-				}else{
-					set9.setMajorTickSpacing(10);
-					set9.setMinorTickSpacing(1);
+				if(comPointer!=null){
+					comPointer.c.setSize(comPointer.c.getWidth(),set6.getValue());
+					int pt=comPointer.c.getHeight()*72/96;
+					if(pt>=100){
+						set9.setMajorTickSpacing(100);
+						set9.setMinorTickSpacing(10);
+					}else{
+						set9.setMajorTickSpacing(10);
+						set9.setMinorTickSpacing(1);
+					}
+					set9.setMaximum(pt);
 				}
-				set9.setMaximum(pt);
 			}
 		});
 		set6.setPaintTicks(true);
@@ -340,30 +361,53 @@ public class fm {
 		//============================
 		desk=new JDesktopPane();
 		desk.setBounds(0,45,frm.getWidth()-300,frm.getHeight()-45);
-		desk.setBackground(new Color(255,255,255));
+		desk.setBackground(colors[colorChooser][2]);
 		frm.add(desk);
 		//============================
 		Tools=new JPanel();
 		Tools.setBounds(desk.getWidth(),75,300,frm.getHeight()-45);
-		Tools.setBackground(new Color(220,220,220));
 		final CardLayout card=new CardLayout();
 		Tools.setLayout(card);
 		Tools.add("con", conPanel);
+		conPanel.setBackground(colors[colorChooser][4]);
 		Tools.add("set", setPane);
+		setPanel.setBackground(colors[colorChooser][4]);
 		Tools.add("cod", codPanel);
+		codPanel.setBackground(colors[colorChooser][4]);
 		frm.add(Tools);
+		//============================
+		final JLabel bigSetButton=new JLabel("設定",JLabel.CENTER);
+		bigSetButton.setFont(new Font("宋体",0,20));
+		bigSetButton.setOpaque(true);
+		bigSetButton.setBackground(null);//設定按鈕顏色
+		bigSetButton.setBounds(frm.getWidth()-165,0,55,45);
+		bigSetButton.setForeground(colors[colorChooser][1]);
+		bigSetButton.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				bigSetButton.setBackground(null);//設定按鈕顏色
+				settings();
+			}
+			public void mouseEntered(MouseEvent e) {
+				bigSetButton.setBackground(new Color(100,220,100));//設定按鈕顏色
+			}
+		    public void mouseExited(MouseEvent e) {
+		    	bigSetButton.setBackground(null);//設定按鈕顏色
+		    }
+		});
+		Title.add(bigSetButton);
 		//============================
 		final JLabel minButton=new JLabel("隱藏",JLabel.CENTER);
 		minButton.setFont(new Font("宋体",0,20));
 		minButton.setOpaque(true);
 		minButton.setBackground(null);//隱藏按鈕顏色
 		minButton.setBounds(frm.getWidth()-110,0,55,45);
+		minButton.setForeground(colors[colorChooser][1]);
 		minButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				frm.setExtendedState(JFrame.ICONIFIED);
 			}
 			public void mouseEntered(MouseEvent e) {
-				minButton.setBackground(new Color(0,191,255));//隱藏按鈕顏色
+				minButton.setBackground(new Color(0,190,255));//隱藏按鈕顏色
 			}
 		    public void mouseExited(MouseEvent e) {
 		    	minButton.setBackground(null);//隱藏按鈕顏色
@@ -376,6 +420,7 @@ public class fm {
 		closeButton.setOpaque(true);
 		closeButton.setBackground(null);//離開按鈕顏色
 		closeButton.setBounds(frm.getWidth()-55,0,55,45);
+		closeButton.setForeground(colors[colorChooser][1]);
 		closeButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				System.exit(0);
@@ -390,18 +435,19 @@ public class fm {
 		Title.add(closeButton);
 		//============================
 		final JLabel conButton=new JLabel("添加組件",JLabel.CENTER);
-		final JLabel setButton=new JLabel("設置組件",JLabel.CENTER);
+		final JLabel setButton=new JLabel("設定組件",JLabel.CENTER);
 		final JLabel codButton=new JLabel("檢視代碼",JLabel.CENTER);
 		//============================
 		conButton.setFont(new Font("宋体",0,15));
 		conButton.setOpaque(true);
-		conButton.setBackground(null);//按鈕顏色
+		conButton.setBackground(colors[colorChooser][2]);//按鈕顏色
+		conButton.setForeground(colors[colorChooser][1]);
 		conButton.setBounds(desk.getWidth(),45,100,30);
 		conButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				conButton.setBackground(null);//按鈕顏色
-				setButton.setBackground(new Color(245,245,245));//按鈕顏色
-				codButton.setBackground(new Color(245,245,245));//按鈕顏色
+				conButton.setBackground(colors[colorChooser][2]);//按鈕顏色
+				setButton.setBackground(colors[colorChooser][0]);//按鈕顏色
+				codButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 				codButton.setText("檢視代碼");
 				card.show(Tools, "con");
 			}
@@ -412,23 +458,24 @@ public class fm {
 		    	conButton.setFont(new Font("宋体",0,15));
 		    }
 		    public void mousePressed(MouseEvent e) {
-		    	conButton.setForeground(Color.GRAY);
+		    	conButton.setForeground(colors[colorChooser][3]);
 		    }
 		    public void mouseReleased(MouseEvent e) {
-		    	conButton.setForeground(Color.BLACK);
+		    	conButton.setForeground(colors[colorChooser][1]);
 		    }
 		});
 		frm.add(conButton);
 		//============================	
 		setButton.setFont(new Font("宋体",0,15));
 		setButton.setOpaque(true);
-		setButton.setBackground(new Color(245,245,245));//按鈕顏色
+		setButton.setBackground(colors[colorChooser][0]);//按鈕顏色
+		setButton.setForeground(colors[colorChooser][1]);
 		setButton.setBounds(desk.getWidth()+100,45,100,30);
 		setButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				setButton.setBackground(null);//按鈕顏色
-				conButton.setBackground(new Color(245,245,245));//按鈕顏色
-				codButton.setBackground(new Color(245,245,245));//按鈕顏色
+				setButton.setBackground(colors[colorChooser][2]);//按鈕顏色
+				conButton.setBackground(colors[colorChooser][0]);//按鈕顏色
+				codButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 				codButton.setText("檢視代碼");
 				card.show(Tools, "set");
 			}
@@ -439,25 +486,29 @@ public class fm {
 		    	setButton.setFont(new Font("宋体",0,15));
 		    }
 		    public void mousePressed(MouseEvent e) {
-		    	setButton.setForeground(Color.GRAY);
+		    	setButton.setForeground(colors[colorChooser][3]);
 		    }
 		    public void mouseReleased(MouseEvent e) {
-		    	setButton.setForeground(Color.BLACK);
+		    	setButton.setForeground(colors[colorChooser][1]);
 		    }
 		});
 		frm.add(setButton);
 		//============================
 		codButton.setFont(new Font("宋体",0,15));
 		codButton.setOpaque(true);
-		codButton.setBackground(new Color(245,245,245));//按鈕顏色
+		codButton.setBackground(colors[colorChooser][0]);//按鈕顏色
+		codButton.setForeground(colors[colorChooser][1]);
 		codButton.setBounds(desk.getWidth()+200,45,100,30);
 		codButton.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				codButton.setBackground(null);//按鈕顏色
-				conButton.setBackground(new Color(245,245,245));//按鈕顏色
-				setButton.setBackground(new Color(245,245,245));//按鈕顏色
+				codButton.setBackground(colors[colorChooser][2]);//按鈕顏色
+				conButton.setBackground(colors[colorChooser][0]);//按鈕顏色
+				setButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 				codButton.setText("整理代碼");
-				cod1.setText("JFrame jf=new JFrame(\""+f.getTitle()+"\");\n" +
+				String title="";
+				if(f.getTitle()!=null)
+					title=f.getTitle();
+				cod1.setText("JFrame jf=new JFrame(\""+title+"\");\n" +
 						"jf.setDefaultCloseOperation(3);\ntry{\n    UIManager.setLookAndFeel" +
 						"(UIManager.getSystemLookAndFeelClassName());" +
 						"\n}catch(Exception e){\n    e.printStackTrace();\n}"+
@@ -476,20 +527,102 @@ public class fm {
 		    	codButton.setFont(new Font("宋体",0,15));
 		    }
 		    public void mousePressed(MouseEvent e) {
-		    	codButton.setForeground(Color.GRAY);
+		    	codButton.setForeground(colors[colorChooser][3]);
 		    }
 		    public void mouseReleased(MouseEvent e) {
-		    	codButton.setForeground(Color.BLACK);
+		    	codButton.setForeground(colors[colorChooser][1]);
 		    }
 		});
 		frm.add(codButton);
 		//============================
 		frm.setVisible(true);
 	}
+	public static void settings(){
+		setFrame=new JDialog(frm, "設定", true);
+		setFrame.setSize(300,430);
+		setFrame.setResizable(false);
+		setFrame.setLocationRelativeTo(null);
+		setFrame.setLayout(new GridLayout(10,1,5,5));
+		
+		setFrame.add(new JLabel("設置語言"));
+		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(中國)","English(UK)"});
+		langu.setSelectedIndex(languChooser);
+		setFrame.add(langu);
+		langu.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==ItemEvent.SELECTED){
+					saveSettings.setEnabled(true);
+				}
+			}
+		});
+		
+		setFrame.add(new JLabel("設置質感"));
+		final JComboBox<String> color=new JComboBox<String>(new String[]{"經典淺色","現代深色"});
+		color.setSelectedIndex(colorChooser);
+		setFrame.add(color);
+		color.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==ItemEvent.SELECTED){
+					saveSettings.setEnabled(true);
+				}
+			}
+		});
+		
+		setFrame.add(new JLabel("設置JFrame標題"));
+		final JTextField frameTitle=new JTextField(frameName);
+		frameTitle.getDocument().addDocumentListener(new DocumentListener() {
+			public void removeUpdate(DocumentEvent e) {
+				saveSettings.setEnabled(true);
+			}
+			public void insertUpdate(DocumentEvent e) {
+				saveSettings.setEnabled(true);
+			}
+			public void changedUpdate(DocumentEvent e) {
+				saveSettings.setEnabled(true);
+			}
+		});
+		setFrame.add(frameTitle);
+		
+		saveSettings=new JButton("保存設定");
+		saveSettings.setEnabled(false);
+		setFrame.add(saveSettings);
+		saveSettings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object[] options = {"   好的   ","  取消  "};
+				if(JOptionPane.showOptionDialog(null,
+						"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？",
+						"訊息",JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,
+						null,options,options[0])==0){
+					File file=new File(fm.class.getResource("/data/settings.txt").getFile());
+					try{
+						BufferedWriter writer=new BufferedWriter(new FileWriter(file,false));
+						writer.write(langu.getSelectedIndex()+"");
+						writer.newLine();
+						writer.write(color.getSelectedIndex()+"");
+						writer.newLine();
+						writer.write(frameTitle.getText());
+						writer.close();
+					}catch(Exception e1){
+							e1.printStackTrace();
+						}
+					System.exit(0);
+				}
+			}
+		});
+		
+		setFrame.setVisible(true);
+	}
 	public static void main(String[] args) throws Exception {
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());//Change Look-and-feel
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		File file=new File(fm.class.getResource("/data/settings.txt").getFile());
+		BufferedReader reader=new BufferedReader(new FileReader(file));
+		languChooser=new Integer(reader.readLine());
+		colorChooser=new Integer(reader.readLine());
+		frameName=reader.readLine();
+		reader.close();
 		new fm();
-		f=new JInternalFrame("jf",true,false,false,false);
+		
+		f=new JInternalFrame(frameName,true,false,false,false);
 		f.setBounds(30,30,300,200);
 		f.setLayout(null);
 		desk.add(f);
@@ -501,8 +634,13 @@ public class fm {
 		    public void componentResized(ComponentEvent e) {
 		    	set3.setMaximum(f.getWidth()-20);
 				set4.setMaximum(f.getHeight()-20);
-				set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
-				set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
+				if(comPointer!=null){
+					set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
+					set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
+				}else{
+					set5.setMaximum(f.getWidth()-8);
+					set6.setMaximum(f.getHeight()-8);
+				}
 		    }
 		});
 		f.addMouseListener(new MouseAdapter() {
