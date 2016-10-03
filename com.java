@@ -81,9 +81,9 @@ public class com {
 		c.setBounds(0,0,150,30);
 	}
 	/**
-     	* 獲取組件的各種屬性
-     	* @return 文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
-     	*/
+     * 獲取組件的各種屬性
+     * @return 文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
+     */
 	public Object[] get(){
 		Object[] data={getText(),c.getX(),c.getY(),c.getWidth(),c.getHeight(),
 				c.getFont().getFontName(),c.getFont().getStyle(),c.getFont().getSize(),
@@ -126,7 +126,7 @@ public class com {
 		if(fm.set1.getItemCount()==0){
 			for(int i=0;i<fm.SET.length;i++){
 		    	fm.SET[i].setEnabled(false);
-		}
+		    }
 		fm.set2.setText(null);
 	    	fm.set3.setValue(0);
 	    	fm.set4.setValue(0);
