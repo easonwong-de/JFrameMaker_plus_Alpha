@@ -126,8 +126,8 @@ public class com {
 		if(fm.set1.getItemCount()==0){
 			for(int i=0;i<fm.SET.length;i++){
 		    	fm.SET[i].setEnabled(false);
-		    }
-			fm.set2.setText(null);
+		}
+		fm.set2.setText(null);
 	    	fm.set3.setValue(0);
 	    	fm.set4.setValue(0);
 	    	fm.set5.setValue(0);
