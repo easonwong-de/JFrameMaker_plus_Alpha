@@ -30,26 +30,36 @@ public class fm {
 	static JSlider set9,set10,set11,set12;
 	static JComponent[] SET;
 	
-	//標題欄色，字體色，背景色，選項卡第二字體色，設定窗欄背景色
+	//標題欄色，字體色，背景色，選項卡第二字體色，設定窗欄背景色，代碼視窗
 	static final Color[][] colors={
-		{new Color(245,245,245),Color.BLACK,new Color(255,255,255),Color.GRAY,new Color(220,220,220)},
-		{new Color(100,100,100),Color.WHITE,new Color(130,130,130),Color.LIGHT_GRAY,new Color(170,170,170)}
+		{new Color(200,200,200),Color.BLACK,new Color(230,230,230),Color.GRAY,new Color(217,217,217),new Color(240,240,240)},
+		{new Color(80,80,80),Color.WHITE,new Color(56,56,56),Color.LIGHT_GRAY,new Color(120,120,120),new Color(70,70,70)}
 		};
 	static final String[][] langus={
-		{"JFrameMaker++ 內測版1.0.2","按鈕","標籤","文本框","文本域","複選欄"/*5*/
+		{"JFrameMaker++ 內測版1.0.3","按鈕","標籤","文本框","文本域","複選欄"/*5*/
 			,"   好的   ","訊息","組件名稱","添加組件","組件的名字不可為空","組件的名稱有重複"/*11*/
 			,"=======單擊此處以獲取更多資訊=======","訪問失敗","一般","加粗","傾斜","加粗且傾斜"/*17*/
 			,"文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍","拷貝代碼","已拷貝到您的剪貼板"/*20*/
 			,"設定","隱藏","離開","添加組件","設定組件","檢視代碼","整理代碼","設定語言","設定質感","設定JFrame標題"/*30*/
 			,"經典淺色","現代深色","保存設定","  取消  "/*34*/
-			,"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？"},
-		{"JFrameMaker++ Alpha1.0.2","JButton","JLabel","JTextField","JTextArea","JCheckBox"
+			,"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？"/*35*/
+			,"選擇一個組件"},
+		{"JFrameMaker++ Alpha1.0.3","JButton","JLabel","JTextField","JTextArea","JCheckBox"
 			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","Duplicate component name"
 			,"======Click here for more Information======","Access Failed","General","Bold","Italic","Bold both Italic"
 			,"Text Abscissa Ordinate Width Height Font_Name Font_Style Font_Size Red Green Blue","Copy the code","Copied to your clipboard"
-			,"Set","Hide","Leave","Add","Setting","See code","Refresh","Language","Feeling","JFrame's title"
+			,"Setting","Hide","Exit","Add","Setting","See code","Refresh","Language","Feeling","JFrame's title"
 			,"Classical light","Modren Deep","Save changes","  Cancle  "
-			,"To save your settings, you need to restart JFrameMaker++. \nAre you sure you want to log out temporarily?"}
+			,"To save your settings, you need to restart JFrameMaker++. \nAre you sure you want to log out temporarily?"
+			,"Choose a component"},
+		{"JFrameMaker ++ アルファ1.0.3","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
+			,"  OK  ","マッサージ","コンポーネントの名前","JFrameに追加","名前は空ではありません","重複するコンポーネント名"
+			,"=============詳細情報=============", "アクセス失敗", "一般", "ボールド","イタリック", "太字と斜体"
+			, "テキスト 緯度 経度 幅 高さ フォント名 フォントスタイル フォントサイズ 赤 緑 青","コードのコピー","クリップボードにコピーされた"
+			,"設定","隠す","終了","追加","設定","コードを参照","リフレッシュ","言語","スタイル","JFrameのタイトル"
+			,"クラシックライト", "モドレンディープ","変更を保存","キャンセル"
+			,"設定を保存するには、JFrameMaker ++を再起動する必要があります。\n一時的にログアウトしてもよろしいですか？"
+			,"コンポーネントを選択"}
 		};
 	
 	fm() throws Exception{
@@ -75,7 +85,7 @@ public class fm {
 		Title.setLayout(null);
 		//============================
 		JLabel title=new JLabel(langus[languChooser][0]);
-		title.setFont(new Font("宋体",0,20));
+		title.setFont(new Font("PMingLiU",0,20));
 		title.setForeground(colors[colorChooser][1]);
 		title.setBounds(10,5,380,30);
 		Title.add(title);
@@ -86,7 +96,9 @@ public class fm {
 				,langus[languChooser][3],langus[languChooser][4],langus[languChooser][5]};
 		final JComboBox<String> con1=new JComboBox<String>(comp);
 		conPanel.add(con1);
-		conPanel.add(new JLabel(langus[languChooser][8]));
+		JLabel la=new JLabel(langus[languChooser][8]);
+		la.setForeground(colors[colorChooser][1]);
+		conPanel.add(la);
 		final JTextField con2=new JTextField();
 		conPanel.add(con2);
 		final JButton con3=new JButton(langus[languChooser][9]);
@@ -125,10 +137,10 @@ public class fm {
 		conPanel.add(con3);
 		conPanel.add(new JLabel());
 		final JLabel con4=new JLabel(langus[languChooser][12],JLabel.CENTER);
-		con4.setFont(new Font("Serif",0,15));
+		con4.setFont(new Font("PMingLiU",0,15));
 		con4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		conPanel.add(con4);
-		conPanel.add(new JLabel("Copyright © 2015-2016(民國百十四-民國百十五)",JLabel.CENTER));
+		conPanel.add(new JLabel("Copyright © 2015",JLabel.CENTER));
 		conPanel.add(new JLabel("WangYixin's Original Software.",JLabel.CENTER));
 		conPanel.add(new JLabel("All rights reserved.",JLabel.CENTER));
 		con4.addMouseListener(new MouseAdapter(){
@@ -154,7 +166,7 @@ public class fm {
 				}
 			}
 			public void mouseEntered(MouseEvent e) {
-				con4.setForeground(Color.RED);
+				con4.setForeground(Color.WHITE);
 			}
 		    public void mouseExited(MouseEvent e) {
 		    	con4.setForeground(Color.BLACK);
@@ -163,7 +175,7 @@ public class fm {
 		//============================
 		
 		setPanel=new JPanel();
-		setPanel.setLayout(new GridLayout(24,1,0,0));
+		setPanel.setLayout(new GridLayout(25,1,0,0));
 		JScrollPane setPane=new JScrollPane(setPanel);
 		setPane.getVerticalScrollBar().setUnitIncrement(17);
 		set1=new JComboBox<String>();
@@ -192,27 +204,33 @@ public class fm {
 			}
 		});
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
+		JLabel lab=new JLabel(langus[languChooser][36]);
+		lab.setForeground(colors[colorChooser][1]);
+		setPanel.add(lab);
 		setPanel.add(set1);
 		
 		set2=new JTextField();
-		set3=new JSlider(0,300-20,0);
-		set4=new JSlider(0,200-20,0);
-		set5=new JSlider(20,300-20,150);
-		set6=new JSlider(20,200-20,30);
+		set3=new JSlider(0,300-150-10,0);
+		set4=new JSlider(0,200-30-35,0);
+		set5=new JSlider(20,300-10,150);
+		set6=new JSlider(20,200-35,30);
 		set7=new JComboBox<String>(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
 		set8=new JComboBox<String>(new String[]{langus[languChooser][14],langus[languChooser][15]
 				,langus[languChooser][16],langus[languChooser][17]});
-		set9=new JSlider(0,22,12);
+		set9=new JSlider(-22,22,12);
 		set10=new JSlider(0,255,0);
 		set11=new JSlider(0,255,0);
 		set12=new JSlider(0,255,0);
 	    
 		SET=new JComponent[]{set2,set3,set4,set5,set6,set7,set8,set9,set10,set11,set12};
 		String[] items=langus[languChooser][18].split(" ");
-		for(int i=0;i<SET.length;i++){
+		for(int i=0;i<SET.length;i++){//添加組件到設定介面
 	    	SET[i].setEnabled(false);
-	    	setPanel.add(new JLabel(items[i]));
+	    	lab=new JLabel(items[i]);
+	    	lab.setForeground(colors[colorChooser][1]);
+	    	setPanel.add(lab);
 			setPanel.add(SET[i]);
+			lab=null;
 			if(i!=0)SET[i].setOpaque(false);
 	    }
 		
@@ -227,9 +245,9 @@ public class fm {
 			public void stateChanged(ChangeEvent e) {
 				if(comPointer!=null){
 					comPointer.c.setLocation(set3.getValue(),comPointer.c.getY());
-					set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
+					set5.setMaximum(f.getWidth()-comPointer.c.getX()-10);
 				}else{
-					set5.setMaximum(f.getWidth()-8);
+					set5.setMaximum(f.getWidth()-10);
 				}
 			}
 		});
@@ -242,9 +260,9 @@ public class fm {
 			public void stateChanged(ChangeEvent e) {
 				if(comPointer!=null){
 					comPointer.c.setLocation(comPointer.c.getX(),set4.getValue());
-					set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
+					set6.setMaximum(f.getHeight()-comPointer.c.getY()-35);
 				}else{
-					set6.setMaximum(f.getHeight()-8);
+					set6.setMaximum(f.getHeight()-35);
 				}
 			}
 		});
@@ -255,8 +273,12 @@ public class fm {
 		
 		set5.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if(comPointer!=null)
+				if(comPointer!=null){
 					comPointer.c.setSize(set5.getValue(), comPointer.c.getHeight());
+					set3.setMaximum(f.getWidth()-comPointer.c.getWidth()-10);
+				}else{
+					set3.setMaximum(f.getWidth()-10);
+				}
 			}
 		});
 		set5.setPaintTicks(true);
@@ -268,6 +290,7 @@ public class fm {
 			public void stateChanged(ChangeEvent e) {
 				if(comPointer!=null){
 					comPointer.c.setSize(comPointer.c.getWidth(),set6.getValue());
+					set4.setMaximum(f.getHeight()-comPointer.c.getHeight()-35);
 					int pt=comPointer.c.getHeight()*72/96;
 					if(pt>=100){
 						set9.setMajorTickSpacing(100);
@@ -277,6 +300,9 @@ public class fm {
 						set9.setMinorTickSpacing(1);
 					}
 					set9.setMaximum(pt);
+					set9.setMinimum(-pt);
+				}else{
+					set4.setMaximum(f.getHeight()-35);
 				}
 			}
 		});
@@ -357,6 +383,8 @@ public class fm {
 		cod1=new JTextArea();
 		cod1.setEditable(false);
 		cod1.setFont(new Font("DialogInput",0,13));
+		cod1.setBackground(colors[colorChooser][5]);
+		cod1.setForeground(colors[colorChooser][1]);
 		JScrollPane Sp=new JScrollPane(cod1);
 		cod.add(Sp);
 		codPanel.add(cod);
@@ -381,7 +409,7 @@ public class fm {
 		frm.add(desk);
 		//============================
 		Tools=new JPanel();
-		Tools.setBounds(desk.getWidth(),75,300,frm.getHeight()-45);
+		Tools.setBounds(desk.getWidth(),75,300,frm.getHeight()-75);
 		final CardLayout card=new CardLayout();
 		Tools.setLayout(card);
 		Tools.add("con", conPanel);
@@ -393,7 +421,7 @@ public class fm {
 		frm.add(Tools);
 		//============================
 		final JLabel bigSetButton=new JLabel(langus[languChooser][21],JLabel.CENTER);
-		bigSetButton.setFont(new Font("宋体",0,20));
+		bigSetButton.setFont(new Font("PMingLiU",0,20));
 		bigSetButton.setOpaque(true);
 		bigSetButton.setBackground(null);//設定按鈕顏色
 		bigSetButton.setBounds(frm.getWidth()-165,0,55,45);
@@ -413,7 +441,7 @@ public class fm {
 		Title.add(bigSetButton);
 		//============================
 		final JLabel minButton=new JLabel(langus[languChooser][22],JLabel.CENTER);
-		minButton.setFont(new Font("宋体",0,20));
+		minButton.setFont(new Font("PMingLiU",0,20));
 		minButton.setOpaque(true);
 		minButton.setBackground(null);//隱藏按鈕顏色
 		minButton.setBounds(frm.getWidth()-110,0,55,45);
@@ -432,7 +460,7 @@ public class fm {
 		Title.add(minButton);
 		//============================
 		final JLabel closeButton=new JLabel(langus[languChooser][23],JLabel.CENTER);
-		closeButton.setFont(new Font("宋体",0,20));
+		closeButton.setFont(new Font("PMingLiU",0,20));
 		closeButton.setOpaque(true);
 		closeButton.setBackground(null);//離開按鈕顏色
 		closeButton.setBounds(frm.getWidth()-55,0,55,45);
@@ -454,7 +482,7 @@ public class fm {
 		final JLabel setButton=new JLabel(langus[languChooser][25],JLabel.CENTER);
 		final JLabel codButton=new JLabel(langus[languChooser][26],JLabel.CENTER);
 		//============================
-		conButton.setFont(new Font("宋体",0,15));
+		conButton.setFont(new Font("PMingLiU",0,15));
 		conButton.setOpaque(true);
 		conButton.setBackground(colors[colorChooser][2]);//按鈕顏色
 		conButton.setForeground(colors[colorChooser][1]);
@@ -468,10 +496,10 @@ public class fm {
 				card.show(Tools, "con");
 			}
 			public void mouseEntered(MouseEvent e) {
-				conButton.setFont(new Font("宋体",0,17));
+				conButton.setFont(new Font("PMingLiU",0,16));
 			}
 		    public void mouseExited(MouseEvent e) {
-		    	conButton.setFont(new Font("宋体",0,15));
+		    	conButton.setFont(new Font("PMingLiU",0,15));
 		    }
 		    public void mousePressed(MouseEvent e) {
 		    	conButton.setForeground(colors[colorChooser][3]);
@@ -482,7 +510,7 @@ public class fm {
 		});
 		frm.add(conButton);
 		//============================	
-		setButton.setFont(new Font("宋体",0,15));
+		setButton.setFont(new Font("PMingLiU",0,15));
 		setButton.setOpaque(true);
 		setButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 		setButton.setForeground(colors[colorChooser][1]);
@@ -496,10 +524,10 @@ public class fm {
 				card.show(Tools, "set");
 			}
 			public void mouseEntered(MouseEvent e) {
-				setButton.setFont(new Font("宋体",0,17));
+				setButton.setFont(new Font("PMingLiU",0,16));
 			}
 		    public void mouseExited(MouseEvent e) {
-		    	setButton.setFont(new Font("宋体",0,15));
+		    	setButton.setFont(new Font("PMingLiU",0,15));
 		    }
 		    public void mousePressed(MouseEvent e) {
 		    	setButton.setForeground(colors[colorChooser][3]);
@@ -510,7 +538,7 @@ public class fm {
 		});
 		frm.add(setButton);
 		//============================
-		codButton.setFont(new Font("宋体",0,15));
+		codButton.setFont(new Font("PMingLiU",0,15));
 		codButton.setOpaque(true);
 		codButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 		codButton.setForeground(colors[colorChooser][1]);
@@ -537,10 +565,10 @@ public class fm {
 				card.show(Tools, "cod");
 			}
 			public void mouseEntered(MouseEvent e) {
-				codButton.setFont(new Font("宋体",0,17));
+				codButton.setFont(new Font("PMingLiU",0,16));
 			}
 		    public void mouseExited(MouseEvent e) {
-		    	codButton.setFont(new Font("宋体",0,15));
+		    	codButton.setFont(new Font("PMingLiU",0,15));
 		    }
 		    public void mousePressed(MouseEvent e) {
 		    	codButton.setForeground(colors[colorChooser][3]);
@@ -561,7 +589,7 @@ public class fm {
 		setFrame.setLayout(new GridLayout(8,1,5,5));
 		
 		setFrame.add(new JLabel(langus[languChooser][28]));
-		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(中國)","English(UK)"});
+		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(中國)","English(US)","日本語(日本)"});
 		langu.setSelectedIndex(languChooser);
 		setFrame.add(langu);
 		langu.addItemListener(new ItemListener() {
@@ -660,14 +688,16 @@ public class fm {
 		    	f.setLocation(30, 30);
 		    }
 		    public void componentResized(ComponentEvent e) {
-		    	set3.setMaximum(f.getWidth()-20);
-				set4.setMaximum(f.getHeight()-20);
+		    	set3.setMaximum(f.getWidth()-10);
+				set4.setMaximum(f.getHeight()-35);
 				if(comPointer!=null){
-					set5.setMaximum(f.getWidth()-8-comPointer.c.getX());
-					set6.setMaximum(f.getHeight()-8-comPointer.c.getY());
+					set3.setMaximum(f.getWidth()-comPointer.c.getWidth()-10);
+					set4.setMaximum(f.getHeight()-comPointer.c.getHeight()-35);
+					set5.setMaximum(f.getWidth()-comPointer.c.getX()-10);
+					set6.setMaximum(f.getHeight()-comPointer.c.getY()-35);
 				}else{
-					set5.setMaximum(f.getWidth()-8);
-					set6.setMaximum(f.getHeight()-8);
+					set5.setMaximum(f.getWidth()-10);
+					set6.setMaximum(f.getHeight()-35);
 				}
 		    }
 		});
