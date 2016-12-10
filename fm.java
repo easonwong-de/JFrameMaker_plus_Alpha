@@ -15,7 +15,6 @@ public class fm {
 	static JPanel Title,Tools,conPanel,setPanel,codPanel;
 	static JDesktopPane desk;
 	static JInternalFrame f;
-	static JDialog setFrame;
 	static TreeMap<String,com> com;
 	static JComboBox<String> set1;
 	static JTextArea cod1;
@@ -36,30 +35,47 @@ public class fm {
 		{new Color(80,80,80),Color.WHITE,new Color(56,56,56),Color.LIGHT_GRAY,new Color(120,120,120),new Color(70,70,70)}
 		};
 	static final String[][] langus={
-		{"JFrameMaker++ 內測版1.0.3","按鈕","標籤","文本框","文本域","複選欄"/*5*/
+		{"JFrameMaker++ 內測版1.0.4","按鈕","標籤","文本框","文本域","複選欄"/*5*/
 			,"   好的   ","訊息","組件名稱","添加組件","組件的名字不可為空","組件的名稱有重複"/*11*/
 			,"=======單擊此處以獲取更多資訊=======","訪問失敗","一般","加粗","傾斜","加粗且傾斜"/*17*/
 			,"文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍","拷貝代碼","已拷貝到您的剪貼板"/*20*/
 			,"設定","隱藏","離開","添加組件","設定組件","檢視代碼","整理代碼","設定語言","設定質感","設定JFrame標題"/*30*/
 			,"經典淺色","現代深色","保存設定","  取消  "/*34*/
 			,"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？"/*35*/
-			,"選擇一個組件"},
-		{"JFrameMaker++ Alpha1.0.3","JButton","JLabel","JTextField","JTextArea","JCheckBox"
+			,"選擇一個組件","新特性","<html><h1>1.0.4更新：</h1><h3>2016年十月</h3><br>" +
+					"<h2>更新了GUI</h2>" +
+						"<p>&emsp調整了字體顏色，使文字更容易閱讀。<p>" +
+					"<h2>新增了「新特性」窗口</h2>" +
+						"<p>&emsp即此窗口。透過此窗口，您可以瞭解歷屆版本的更新及本版本最新特性。</p>" +
+					"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
+		{"JFrameMaker++ Alpha1.0.4","JButton","JLabel","JTextField","JTextArea","JCheckBox"
 			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","Duplicate component name"
 			,"======Click here for more Information======","Access Failed","General","Bold","Italic","Bold both Italic"
 			,"Text Abscissa Ordinate Width Height Font_Name Font_Style Font_Size Red Green Blue","Copy the code","Copied to your clipboard"
-			,"Setting","Hide","Exit","Add","Setting","See code","Refresh","Language","Feeling","JFrame's title"
+			,"Setting","Hide","Exit","Add","Settings","See code","Refresh","Language","Feeling","JFrame's title"
 			,"Classical light","Modren Deep","Save changes","  Cancle  "
 			,"To save your settings, you need to restart JFrameMaker++. \nAre you sure you want to log out temporarily?"
-			,"Choose a component"},
-		{"JFrameMaker ++ アルファ1.0.3","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
+			,"Choose a component","What's new","<html><h1>1.0.4 Updated: </h1><h3>October 2016</h3><br>"+
+					"<h2> Updated GUI </h2>" +
+						"<p> &emsp Adjusted the font color to make the text easier to read. <p>" +
+					"<h2> Window \"What's new\" added </h2>" +
+						"<p> &emsp Ie this window. Through this window, you can learn the latest features in this version " +
+						"and the <br>&emsp updations of previous versions.</p>" +
+					"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
+		{"JFrameMaker++ アルファ1.0.4","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
 			,"  OK  ","マッサージ","コンポーネントの名前","JFrameに追加","名前は空ではありません","重複するコンポーネント名"
 			,"=============詳細情報=============", "アクセス失敗", "一般", "ボールド","イタリック", "太字と斜体"
 			, "テキスト 緯度 経度 幅 高さ フォント名 フォントスタイル フォントサイズ 赤 緑 青","コードのコピー","クリップボードにコピーされた"
 			,"設定","隠す","終了","追加","設定","コードを参照","リフレッシュ","言語","スタイル","JFrameのタイトル"
 			,"クラシックライト", "モドレンディープ","変更を保存","キャンセル"
 			,"設定を保存するには、JFrameMaker ++を再起動する必要があります。\n一時的にログアウトしてもよろしいですか？"
-			,"コンポーネントを選択"}
+			,"コンポーネントを選択","新機能","<html><h1>1.0.4アップデート：</h1><h3>2016年10月</h3><br>" +
+					"<h2>GUIを更新</h2>" +
+						"<p>&emspテキストを読みやすくするためにフォントの色を調整しました。<p>" +
+					"<h2>「新機能」ウィンドウを追加された</h2>" +
+						"<p>&emspつまり、このウィンドウ。 このウィンドウでは、このバージョンの最新機能と<br>&emsp以前のバージョンのアップデー" +
+						"トを知ることができます。</p>" +
+					"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"}
 		};
 	
 	fm() throws Exception{
@@ -140,13 +156,12 @@ public class fm {
 		con4.setFont(new Font("PMingLiU",0,15));
 		con4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		conPanel.add(con4);
-		conPanel.add(new JLabel("Copyright © 2015",JLabel.CENTER));
-		conPanel.add(new JLabel("WangYixin's Original Software.",JLabel.CENTER));
-		conPanel.add(new JLabel("All rights reserved.",JLabel.CENTER));
+		conPanel.add(new JLabel("<html><center>Copyright © 2016 WangYixin's Original Software. " +
+				"</br>All rights reserved.</center></html>",JLabel.CENTER));
 		con4.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				try{
-					URI uri=new URI("http://user.qzone.qq.com/2826509864/main");
+					URI uri=new URI("https://github.com/Wang-Yatsing");
 					Desktop dtp=Desktop.getDesktop();
 					if(Desktop.isDesktopSupported()&&dtp.isSupported(Desktop.Action.BROWSE)){
 						dtp.browse(uri);
@@ -204,9 +219,9 @@ public class fm {
 			}
 		});
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
-		JLabel lab=new JLabel(langus[languChooser][36]);
-		lab.setForeground(colors[colorChooser][1]);
-		setPanel.add(lab);
+		JLabel lable=new JLabel(langus[languChooser][36]);
+		lable.setForeground(colors[colorChooser][1]);
+		setPanel.add(lable);
 		setPanel.add(set1);
 		
 		set2=new JTextField();
@@ -226,11 +241,11 @@ public class fm {
 		String[] items=langus[languChooser][18].split(" ");
 		for(int i=0;i<SET.length;i++){//添加組件到設定介面
 	    	SET[i].setEnabled(false);
-	    	lab=new JLabel(items[i]);
-	    	lab.setForeground(colors[colorChooser][1]);
-	    	setPanel.add(lab);
+	    	lable=new JLabel(items[i]);
+	    	lable.setForeground(colors[colorChooser][1]);
+	    	setPanel.add(lable);
 			setPanel.add(SET[i]);
-			lab=null;
+			lable=null;
 			if(i!=0)SET[i].setOpaque(false);
 	    }
 		
@@ -255,6 +270,7 @@ public class fm {
 		set3.setMajorTickSpacing(100);
 		set3.setMinorTickSpacing(10);
 		set3.setPaintLabels(true);
+		set3.setForeground(colors[colorChooser][1]);
 		
 		set4.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -270,6 +286,7 @@ public class fm {
 		set4.setMajorTickSpacing(100);
 		set4.setMinorTickSpacing(10);
 		set4.setPaintLabels(true);
+		set4.setForeground(colors[colorChooser][1]);
 		
 		set5.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -285,6 +302,7 @@ public class fm {
 		set5.setMajorTickSpacing(100);
 		set5.setMinorTickSpacing(10);
 		set5.setPaintLabels(true);
+		set5.setForeground(colors[colorChooser][1]);
 		
 		set6.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -310,6 +328,7 @@ public class fm {
 		set6.setMajorTickSpacing(100);
 		set6.setMinorTickSpacing(10);
 		set6.setPaintLabels(true);
+		set6.setForeground(colors[colorChooser][1]);
 		
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 		set7.addItemListener(new ItemListener(){
@@ -340,6 +359,7 @@ public class fm {
 		set9.setMajorTickSpacing(10);
 		set9.setMinorTickSpacing(1);
 		set9.setPaintLabels(true);
+		set9.setForeground(colors[colorChooser][1]);
 		
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 		set10.addChangeListener(new ChangeListener() {
@@ -352,6 +372,7 @@ public class fm {
 		set10.setMajorTickSpacing(51);
 		set10.setMinorTickSpacing(17);
 		set10.setPaintLabels(true);
+		set10.setForeground(colors[colorChooser][1]);
 		
 		set11.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -363,6 +384,7 @@ public class fm {
 		set11.setMajorTickSpacing(51);
 		set11.setMinorTickSpacing(17);
 		set11.setPaintLabels(true);
+		set11.setForeground(colors[colorChooser][1]);
 		
 		set12.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -374,6 +396,7 @@ public class fm {
 		set12.setMajorTickSpacing(51);
 		set12.setMinorTickSpacing(17);
 		set12.setPaintLabels(true);
+		set12.setForeground(colors[colorChooser][1]);
 		//============================
 		codPanel=new JPanel();
 		codPanel.setLayout(null);
@@ -582,14 +605,14 @@ public class fm {
 		frm.setVisible(true);
 	}
 	public static void settings(){
-		setFrame=new JDialog(frm,langus[languChooser][21], true);
+		final JDialog setFrame=new JDialog(frm,langus[languChooser][21], true);
 		setFrame.setSize(300,350);
 		setFrame.setResizable(false);
 		setFrame.setLocationRelativeTo(null);
 		setFrame.setLayout(new GridLayout(8,1,5,5));
 		
 		setFrame.add(new JLabel(langus[languChooser][28]));
-		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(中國)","English(US)","日本語(日本)"});
+		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(中國)","English(US&UK)","日本語(日本)"});
 		langu.setSelectedIndex(languChooser);
 		setFrame.add(langu);
 		langu.addItemListener(new ItemListener() {
@@ -654,6 +677,33 @@ public class fm {
 			}
 		});
 		
+		final JDialog seeFrame=new JDialog(frm,langus[languChooser][37], true);
+		seeFrame.setSize(600,400);
+		seeFrame.setResizable(false);
+		seeFrame.setLocationRelativeTo(null);
+		seeFrame.setLayout(new GridLayout(1,1));
+		JLabel label=new JLabel(langus[languChooser][38]);
+		label.setFont(new Font("PMingLiU",0,15));
+		JScrollPane Sp=new JScrollPane(label);
+		seeFrame.add(Sp);
+		seeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		seeFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				seeFrame.setVisible(false);
+				setFrame.setVisible(true);
+				setFrame.setLocationRelativeTo(null);
+			}
+		});
+		
+		JButton seeNewFun=new JButton(langus[languChooser][37]);
+		setFrame.add(seeNewFun);
+		seeNewFun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setFrame.setVisible(false);
+				seeFrame.setVisible(true);
+				seeFrame.setLocationRelativeTo(null);
+			}
+		});
 		setFrame.setVisible(true);
 	}
 	public static void main(String[] args) throws Exception {
