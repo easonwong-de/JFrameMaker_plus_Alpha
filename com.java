@@ -23,6 +23,7 @@ public class com {
 		case "JTextArea":{c=new JTextArea(name);break;}
 		case "JCheckBox":{c=new JCheckBox(name);c.setBackground(Color.WHITE);break;}
 		}
+		c.setFont(new Font("PMingLiU",0,12));
 		moved=new MouseAdapter(){
 			public void mousePressed(MouseEvent e) {
 				if(c.getWidth()-e.getX()<10&&c.getHeight()-e.getY()<10){
