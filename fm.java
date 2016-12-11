@@ -42,12 +42,16 @@ public class fm {
 			,"設定","隱藏","離開","添加組件","設定組件","檢視代碼","整理代碼","設定語言","設定質感","設定JFrame標題"/*30*/
 			,"經典淺色","現代深色","保存設定","  取消  "/*34*/
 			,"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？"/*35*/
-			,"選擇一個組件","新特性","<html><h1>1.0.4更新：</h1><h3>2016年十月</h3><br>" +
-					"<h2>更新了GUI</h2>" +
-						"<p>&emsp調整了字體顏色，使文字更容易閱讀。<p>" +
-					"<h2>新增了「新特性」窗口</h2>" +
-						"<p>&emsp即此窗口。透過此窗口，您可以瞭解歷屆版本的更新及本版本最新特性。</p>" +
-					"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
+			,"選擇一個組件","新特性"/*37*/
+			,"<html><h1>1.0.4更新：</h1><h3>2016年十月</h3><br>" +
+				"<h2>更新了GUI</h2>" +
+					"<p>&emsp調整了字體顏色以及字號，使文字更容易閱讀。<p>" +
+				"<h2>新增了「新特性」窗口</h2>" +
+					"<p>&emsp即此窗口。透過此窗口，您可以瞭解歷屆版本的更新及本版本最新特性。</p>" +
+			"<h1>1.0.3更新：</h1><h3>2016年十月</h3><br>" +
+				"<h2>更新了語言模塊</h2>" +
+					"<p>&emsp新增了日語模式，適合更多用戶使用。<p>"+
+				"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
 		{"JFrameMaker++ Alpha1.0.4","JButton","JLabel","JTextField","JTextArea","JCheckBox"
 			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","Duplicate component name"
 			,"======Click here for more Information======","Access Failed","General","Bold","Italic","Bold both Italic"
@@ -59,7 +63,7 @@ public class fm {
 					"<h2> Updated GUI </h2>" +
 						"<p> &emsp Adjusted the font color to make the text easier to read. <p>" +
 					"<h2> Window \"What's new\" added </h2>" +
-						"<p> &emsp Ie this window. Through this window, you can learn the latest features in this version " +
+						"<p> &emsp Ie this window. With this window, you can learn the latest features in this version " +
 						"and the <br>&emsp updations of previous versions.</p>" +
 					"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
 		{"JFrameMaker++ アルファ1.0.4","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
@@ -112,9 +116,10 @@ public class fm {
 				,langus[languChooser][3],langus[languChooser][4],langus[languChooser][5]};
 		final JComboBox<String> con1=new JComboBox<String>(comp);
 		conPanel.add(con1);
-		JLabel la=new JLabel(langus[languChooser][8]);
-		la.setForeground(colors[colorChooser][1]);
-		conPanel.add(la);
+		JLabel label=new JLabel(langus[languChooser][8],JLabel.CENTER);
+		label.setForeground(colors[colorChooser][1]);
+		label.setFont(new Font("PMingLiU",0,14));
+		conPanel.add(label);
 		final JTextField con2=new JTextField();
 		conPanel.add(con2);
 		final JButton con3=new JButton(langus[languChooser][9]);
@@ -157,7 +162,7 @@ public class fm {
 		con4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		conPanel.add(con4);
 		conPanel.add(new JLabel("<html><center>Copyright © 2016 WangYixin's Original Software. " +
-				"</br>All rights reserved.</center></html>",JLabel.CENTER));
+				"</br>All rights reserved.</center></html>"));
 		con4.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				try{
@@ -219,9 +224,10 @@ public class fm {
 			}
 		});
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
-		JLabel lable=new JLabel(langus[languChooser][36]);
-		lable.setForeground(colors[colorChooser][1]);
-		setPanel.add(lable);
+		label=new JLabel(langus[languChooser][36],JLabel.CENTER);
+		label.setForeground(colors[colorChooser][1]);
+		label.setFont(new Font("PMingLiU",0,14));
+		setPanel.add(label);
 		setPanel.add(set1);
 		
 		set2=new JTextField();
@@ -241,11 +247,12 @@ public class fm {
 		String[] items=langus[languChooser][18].split(" ");
 		for(int i=0;i<SET.length;i++){//添加組件到設定介面
 	    	SET[i].setEnabled(false);
-	    	lable=new JLabel(items[i]);
-	    	lable.setForeground(colors[colorChooser][1]);
-	    	setPanel.add(lable);
+	    	label=new JLabel(items[i],JLabel.CENTER);
+	    	label.setForeground(colors[colorChooser][1]);
+	    	label.setFont(new Font("PMingLiU",0,14));
+	    	setPanel.add(label);
 			setPanel.add(SET[i]);
-			lable=null;
+			label=null;
 			if(i!=0)SET[i].setOpaque(false);
 	    }
 		
@@ -339,6 +346,7 @@ public class fm {
 				}
 			}
 		});
+		
 		
 		set8.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent e){
