@@ -43,15 +43,17 @@ public class fm {
 			,"經典淺色","現代深色","保存設定","  取消  "/*34*/
 			,"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？"/*35*/
 			,"選擇一個組件","新特性"/*37*/
-			,"<html><h1>1.0.4更新：</h1><h3>2016年十月</h3><br>" +
-				"<h2>更新了GUI</h2>" +
+			,"<html><h2>1.0.4更新：</h2><h3>2016年十二月</h3>" +
+				"<h3>更新了GUI</h3>" +
 					"<p>&emsp調整了字體顏色以及字號，使文字更容易閱讀。<p>" +
-				"<h2>新增了「新特性」窗口</h2>" +
-					"<p>&emsp即此窗口。透過此窗口，您可以瞭解歷屆版本的更新及本版本最新特性。</p>" +
-			"<h1>1.0.3更新：</h1><h3>2016年十月</h3><br>" +
-				"<h2>更新了語言模塊</h2>" +
-					"<p>&emsp新增了日語模式，適合更多用戶使用。<p>"+
-				"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
+				"<h3>新增了「新特性」窗口</h3>" +
+					"<p>&emsp即此窗口。透過此窗口，您可以瞭解歷屆版本的更新及本版本最新特性。</p><br>" +
+			"<h2>1.0.3更新：</h2><h3>2016年十二月</h3>" +
+				"<h3>更新了語言模塊</h3>" +
+					"<p>&emsp新增了日語模式，適合更多用戶使用。<p>" +
+				"<h3>修復了漏洞</h3>" +
+					"<p>&emsp調整了組件平移算法。<p>"+
+			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
 		{"JFrameMaker++ Alpha1.0.4","JButton","JLabel","JTextField","JTextArea","JCheckBox"
 			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","Duplicate component name"
 			,"======Click here for more Information======","Access Failed","General","Bold","Italic","Bold both Italic"
@@ -59,13 +61,19 @@ public class fm {
 			,"Setting","Hide","Exit","Add","Settings","See code","Refresh","Language","Feeling","JFrame's title"
 			,"Classical light","Modren Deep","Save changes","  Cancle  "
 			,"To save your settings, you need to restart JFrameMaker++. \nAre you sure you want to log out temporarily?"
-			,"Choose a component","What's new","<html><h1>1.0.4 Updated: </h1><h3>October 2016</h3><br>"+
-					"<h2> Updated GUI </h2>" +
-						"<p> &emsp Adjusted the font color to make the text easier to read. <p>" +
-					"<h2> Window \"What's new\" added </h2>" +
-						"<p> &emsp Ie this window. With this window, you can learn the latest features in this version " +
-						"and the <br>&emsp updations of previous versions.</p>" +
-					"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
+			,"Choose a component","What's new"
+			,"<html><h2>1.0.4 Updated: </h2><h3>October 2016</h3>"+
+				"<h3> Updated GUI </h3>" +
+					"<p> &emsp Adjusted the font color to make the text easier to read. <p>" +
+				"<h3> Window \"What's new\" added </h3>" +
+					"<p> &emsp Ie this window. With this window, you can learn the latest features in this version " +
+					"and the <br>&emsp updations of previous versions.</p><br>" +
+			"<h2>1.0.3 Updated: </h2><h3>October 2016</h3>" +
+				"<h3>Language department updated </h3>" +
+					"<p>&emsp Japanese added to fit more users. <p>" +
+				"<h3>Debugged</h3>" +
+					"<p>&emsp The components translation algorithm was adjusted. <p>"+
+			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
 		{"JFrameMaker++ アルファ1.0.4","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
 			,"  OK  ","マッサージ","コンポーネントの名前","JFrameに追加","名前は空ではありません","重複するコンポーネント名"
 			,"=============詳細情報=============", "アクセス失敗", "一般", "ボールド","イタリック", "太字と斜体"
@@ -73,13 +81,19 @@ public class fm {
 			,"設定","隠す","終了","追加","設定","コードを参照","リフレッシュ","言語","スタイル","JFrameのタイトル"
 			,"クラシックライト", "モドレンディープ","変更を保存","キャンセル"
 			,"設定を保存するには、JFrameMaker ++を再起動する必要があります。\n一時的にログアウトしてもよろしいですか？"
-			,"コンポーネントを選択","新機能","<html><h1>1.0.4アップデート：</h1><h3>2016年10月</h3><br>" +
-					"<h2>GUIを更新</h2>" +
-						"<p>&emspテキストを読みやすくするためにフォントの色を調整しました。<p>" +
-					"<h2>「新機能」ウィンドウを追加された</h2>" +
-						"<p>&emspつまり、このウィンドウ。 このウィンドウでは、このバージョンの最新機能と<br>&emsp以前のバージョンのアップデー" +
-						"トを知ることができます。</p>" +
-					"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"}
+			,"コンポーネントを選択","新機能"
+			,"<html><h2>バージョン1.0.4：</h2><h3>2016年12月</h3>" +
+				"<h3>更新されたインターフェイス</h3>" +
+					"<p>&emspフォントの色やフォントサイズを調整し、読みテキストが容易になります。<p>" +
+				"<h3>追加された「新機能」ウィンドウ</h3>" +
+					"<p>&emspこのウィンドウそれ。このウィンドウから、あなたは、このバージョンで<br>最新の機能" +
+					"を学習し、以前のバージョンを更新することができます。</p><br>" +
+			"<h2>バージョン1.0.3：</h2><h3>2016年12月</h3>" +
+				"<h3>更新された言語モジュール</h3>" +
+					"<p>&emspより多くのユーザーのために、日本語を追加しました。<p>" +
+				"<h3>デバッグされた</h3>" +
+					"<p>&emspコンポーネントの移動アルゴリズムが調整されました。<p>"+
+			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"}
 		};
 	
 	fm() throws Exception{
@@ -267,9 +281,9 @@ public class fm {
 			public void stateChanged(ChangeEvent e) {
 				if(comPointer!=null){
 					comPointer.c.setLocation(set3.getValue(),comPointer.c.getY());
-					set5.setMaximum(f.getWidth()-comPointer.c.getX()-10);
+					set5.setMaximum(f.getContentPane().getWidth()-comPointer.c.getX());
 				}else{
-					set5.setMaximum(f.getWidth()-10);
+					set5.setMaximum(f.getContentPane().getWidth());
 				}
 			}
 		});
@@ -283,9 +297,9 @@ public class fm {
 			public void stateChanged(ChangeEvent e) {
 				if(comPointer!=null){
 					comPointer.c.setLocation(comPointer.c.getX(),set4.getValue());
-					set6.setMaximum(f.getHeight()-comPointer.c.getY()-35);
+					set6.setMaximum(f.getContentPane().getHeight()-comPointer.c.getY());
 				}else{
-					set6.setMaximum(f.getHeight()-35);
+					set6.setMaximum(f.getContentPane().getHeight());
 				}
 			}
 		});
@@ -299,9 +313,9 @@ public class fm {
 			public void stateChanged(ChangeEvent e) {
 				if(comPointer!=null){
 					comPointer.c.setSize(set5.getValue(), comPointer.c.getHeight());
-					set3.setMaximum(f.getWidth()-comPointer.c.getWidth()-10);
+					set3.setMaximum(f.getContentPane().getWidth()-comPointer.c.getWidth());
 				}else{
-					set3.setMaximum(f.getWidth()-10);
+					set3.setMaximum(f.getContentPane().getWidth());
 				}
 			}
 		});
@@ -315,7 +329,7 @@ public class fm {
 			public void stateChanged(ChangeEvent e) {
 				if(comPointer!=null){
 					comPointer.c.setSize(comPointer.c.getWidth(),set6.getValue());
-					set4.setMaximum(f.getHeight()-comPointer.c.getHeight()-35);
+					set4.setMaximum(f.getContentPane().getHeight()-comPointer.c.getHeight());
 					int pt=comPointer.c.getHeight()*72/96;
 					if(pt>=100){
 						set9.setMajorTickSpacing(100);
@@ -327,7 +341,7 @@ public class fm {
 					set9.setMaximum(pt);
 					set9.setMinimum(-pt);
 				}else{
-					set4.setMaximum(f.getHeight()-35);
+					set4.setMaximum(f.getContentPane().getHeight());
 				}
 			}
 		});
@@ -749,13 +763,13 @@ public class fm {
 		    	set3.setMaximum(f.getWidth()-10);
 				set4.setMaximum(f.getHeight()-35);
 				if(comPointer!=null){
-					set3.setMaximum(f.getWidth()-comPointer.c.getWidth()-10);
-					set4.setMaximum(f.getHeight()-comPointer.c.getHeight()-35);
-					set5.setMaximum(f.getWidth()-comPointer.c.getX()-10);
-					set6.setMaximum(f.getHeight()-comPointer.c.getY()-35);
+					set3.setMaximum(f.getContentPane().getWidth()-comPointer.c.getWidth());
+					set4.setMaximum(f.getContentPane().getHeight()-comPointer.c.getHeight());
+					set5.setMaximum(f.getContentPane().getWidth()-comPointer.c.getX());
+					set6.setMaximum(f.getContentPane().getHeight()-comPointer.c.getY());
 				}else{
-					set5.setMaximum(f.getWidth()-10);
-					set6.setMaximum(f.getHeight()-35);
+					set5.setMaximum(f.getContentPane().getWidth());
+					set6.setMaximum(f.getContentPane().getHeight());
 				}
 		    }
 		});
