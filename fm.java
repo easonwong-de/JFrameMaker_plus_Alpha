@@ -29,14 +29,14 @@ public class fm {
 	static JSlider set9,set10,set11,set12;
 	static JComponent[] SET;
 	
-	//標題欄色，字體色，背景色，選項卡第二字體色，設定窗欄背景色，代碼視窗
+	//標題欄色，字體色，背景色，選項卡第二字體色，設定窗欄背景色，代碼視窗字體色，代碼視窗第二字體色
 	static final Color[][] colors={
-		{new Color(200,200,200),Color.BLACK,new Color(230,230,230),Color.GRAY,new Color(217,217,217),new Color(240,240,240)},
-		{new Color(80,80,80),Color.WHITE,new Color(56,56,56),Color.LIGHT_GRAY,new Color(120,120,120),new Color(70,70,70)}
+		{new Color(200,200,200),Color.BLACK,new Color(230,230,230),Color.GRAY,new Color(217,217,217),new Color(240,240,240),Color.WHITE},
+		{new Color(80,80,80),Color.WHITE,new Color(56,56,56),Color.LIGHT_GRAY,new Color(120,120,120),new Color(70,70,70),Color.BLACK}
 		};
 	static final String[][] langus={
 		{"JFrameMaker++ 內測版1.0.4","按鈕","標籤","文本框","文本域","複選欄"/*5*/
-			,"   好的   ","訊息","組件名稱","添加組件","組件的名字不可為空","組件的名稱有重複"/*11*/
+			,"   好的   ","訊息","組件名稱","添加組件","組件的名字不可為空","無效的組件名稱"/*11*/
 			,"=======單擊此處以獲取更多資訊=======","訪問失敗","一般","加粗","傾斜","加粗且傾斜"/*17*/
 			,"文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍","拷貝代碼","已拷貝到您的剪貼板"/*20*/
 			,"設定","隱藏","離開","添加組件","設定組件","檢視代碼","整理代碼","設定語言","設定質感","設定JFrame標題"/*30*/
@@ -48,6 +48,8 @@ public class fm {
 					"<p>&emsp調整了字體顏色以及字號，使文字更容易閱讀。<p>" +
 				"<h3>新增了「新特性」窗口</h3>" +
 					"<p>&emsp即此窗口。透過此窗口，您可以瞭解歷屆版本的更新及本版本最新特性。</p><br>" +
+				"<h3>增強了組件名稱限制功能</h3>" +
+					"<p>&emsp該功能會將組件的名稱限制在命名規則以內。</p><br>" +
 			"<h2>1.0.3更新：</h2><h3>2016年十二月</h3>" +
 				"<h3>更新了語言模塊</h3>" +
 					"<p>&emsp新增了日語模式，適合更多用戶使用。<p>" +
@@ -55,7 +57,7 @@ public class fm {
 					"<p>&emsp調整了組件平移算法。<p>"+
 			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
 		{"JFrameMaker++ Alpha1.0.4","JButton","JLabel","JTextField","JTextArea","JCheckBox"
-			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","Duplicate component name"
+			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","invalid name"
 			,"======Click here for more Information======","Access Failed","General","Bold","Italic","Bold both Italic"
 			,"Text Abscissa Ordinate Width Height Font_Name Font_Style Font_Size Red Green Blue","Copy the code","Copied to your clipboard"
 			,"Setting","Hide","Exit","Add","Settings","See code","Refresh","Language","Feeling","JFrame's title"
@@ -68,6 +70,8 @@ public class fm {
 				"<h3> Window \"What's new\" added </h3>" +
 					"<p> &emsp Ie this window. With this window, you can learn the latest features in this version " +
 					"and the <br>&emsp updations of previous versions.</p><br>" +
+				"<h3>Strengthened the limit about Components' name</h3>" +
+					"<p>&emsp This restricts the component name to a naming convention. </p><br>" +
 			"<h2>1.0.3 Updated: </h2><h3>October 2016</h3>" +
 				"<h3>Language department updated </h3>" +
 					"<p>&emsp Japanese added to fit more users. <p>" +
@@ -75,7 +79,7 @@ public class fm {
 					"<p>&emsp The components translation algorithm was adjusted. <p>"+
 			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
 		{"JFrameMaker++ アルファ1.0.4","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
-			,"  OK  ","マッサージ","コンポーネントの名前","JFrameに追加","名前は空ではありません","重複するコンポーネント名"
+			,"  OK  ","マッサージ","コンポーネントの名前","JFrameに追加","名前は空ではありません","重複コンポーネント名"
 			,"=============詳細情報=============", "アクセス失敗", "一般", "ボールド","イタリック", "太字と斜体"
 			, "テキスト 緯度 経度 幅 高さ フォント名 フォントスタイル フォントサイズ 赤 緑 青","コードのコピー","クリップボードにコピーされた"
 			,"設定","隠す","終了","追加","設定","コードを参照","リフレッシュ","言語","スタイル","JFrameのタイトル"
@@ -88,6 +92,8 @@ public class fm {
 				"<h3>追加された「新機能」ウィンドウ</h3>" +
 					"<p>&emspこのウィンドウそれ。このウィンドウから、あなたは、このバージョンで<br>最新の機能" +
 					"を学習し、以前のバージョンを更新することができます。</p><br>" +
+				"<h3>コンポーネント名の制限を強化</h3>" +
+					"<p>&emsp機能モジュールの名前が命名規則に限定されます。</p><br>" +
 			"<h2>バージョン1.0.3：</h2><h3>2016年12月</h3>" +
 				"<h3>更新された言語モジュール</h3>" +
 					"<p>&emspより多くのユーザーのために、日本語を追加しました。<p>" +
@@ -140,8 +146,13 @@ public class fm {
 		con3.setOpaque(false);
 		con3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(!com.containsKey(con2.getText())|con2.getText()=="jf"){
-					if(con2.getText().length()!=0){
+				String name=con2.getText();
+				if(name.length()==0){
+					Object[] options = {langus[languChooser][6]};
+					JOptionPane.showOptionDialog(null,
+					langus[languChooser][10],
+					langus[languChooser][7],JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
+				}else if((!com.containsKey(name))&&name!=f.getTitle()&&IsTheNameOK(name)){
 						switch(con1.getSelectedIndex()){
 						case 0:com.put(con2.getText(), new com("JButton",con2.getText()));
 						set1.addItem("JButton "+con2.getText());break;
@@ -155,16 +166,10 @@ public class fm {
 						set1.addItem("JCheckBox "+con2.getText());break;
 						}
 						con2.setText(null);
-					}else{
-						Object[] options = {langus[languChooser][6]};
-						JOptionPane.showOptionDialog(null,
-								langus[languChooser][10],
-						langus[languChooser][7],JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
-					}
 				}else{
 					Object[] options = {langus[languChooser][6]};
 					JOptionPane.showOptionDialog(null,
-					langus[languChooser][11],
+							langus[languChooser][11],
 					langus[languChooser][7],JOptionPane.ERROR_MESSAGE,JOptionPane.ERROR_MESSAGE,null,options,options[0]);
 				}
 			}
@@ -428,6 +433,8 @@ public class fm {
 		cod1=new JTextArea();
 		cod1.setEditable(false);
 		cod1.setFont(new Font("DialogInput",0,13));
+		cod1.setSelectionColor(new Color(190,190,190));
+		cod1.setSelectedTextColor(colors[colorChooser][6]);
 		cod1.setBackground(colors[colorChooser][5]);
 		cod1.setForeground(colors[colorChooser][1]);
 		JScrollPane Sp=new JScrollPane(cod1);
@@ -625,6 +632,21 @@ public class fm {
 		frm.add(codButton);
 		//============================
 		frm.setVisible(true);
+	}
+	public static boolean IsTheNameOK(String name){
+		if(!((name.charAt(0)>='a'&&name.charAt(0)<='z')
+				||(name.charAt(0)>='A'&&name.charAt(0)<='Z'))){
+			return false;
+		}
+		for(int i=1;i<name.length();i++){
+			if(!((name.charAt(i)>='a'&&name.charAt(i)<='z')
+					||(name.charAt(i)>='A'&&name.charAt(i)<='Z')
+					||(name.charAt(i)>='0'&&name.charAt(i)<='9')
+					||name.charAt(i)=='_')){
+				return false;
+			}
+		}
+		return true;
 	}
 	public static void settings(){
 		final JDialog setFrame=new JDialog(frm,langus[languChooser][21], true);
