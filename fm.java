@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.JComboBox;
 import javax.swing.event.*;
 import javax.swing.filechooser.FileSystemView;
 
@@ -16,7 +17,7 @@ public class fm {
 	static JDesktopPane desk;
 	static JInternalFrame f;
 	static TreeMap<String,com> com;
-	static JComboBox<String> set1;
+	static JComboBox <String> set1;
 	static JTextArea cod1;
 	static JButton saveSettings;
 	static com comPointer;
@@ -25,7 +26,7 @@ public class fm {
 	//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 	static JTextField set2;
 	static JSlider set3,set4,set5,set6;
-	static JComboBox<String> set7,set8;
+	static JComboBox <String> set7,set8;
 	static JSlider set9,set10,set11,set12;
 	static JComponent[] SET;
 	
@@ -35,15 +36,17 @@ public class fm {
 		{new Color(80,80,80),Color.WHITE,new Color(56,56,56),Color.LIGHT_GRAY,new Color(120,120,120),new Color(70,70,70),Color.BLACK}
 		};
 	static final String[][] langus={
-		{"JFrameMaker++ 內測版1.0.4","按鈕","標籤","文本框","文本域","複選欄"/*5*/
+		{"JFrameMaker++ 內測版1.0.5","按鈕","標籤","文本框","文本域","複選欄"/*5*/
 			,"   好的   ","訊息","組件名稱","添加組件","組件的名字不可為空","無效的組件名稱"/*11*/
-			,"=======單擊此處以獲取更多資訊=======","訪問失敗","一般","加粗","傾斜","加粗且傾斜"/*17*/
+			,"====單擊此處以獲取更多資訊====","訪問失敗","一般","加粗","傾斜","加粗且傾斜"/*17*/
 			,"文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍","拷貝代碼","已拷貝到您的剪貼板"/*20*/
 			,"設定","隱藏","離開","添加組件","設定組件","檢視代碼","整理代碼","設定語言","設定質感","設定JFrame標題"/*30*/
 			,"經典淺色","現代深色","保存設定","  取消  "/*34*/
 			,"保存設定需要重新啟動JFrameMaker++，確認要暫時登出？"/*35*/
 			,"選擇一個組件","新特性"/*37*/
-			,"<html><h2>1.0.4更新：</h2><h3>2016年十二月</h3>" +
+			,"<html><h2>1.0.5更新：</h2><h3>2019年十二月</h3>" +
+				"<h3>做出了微小的改動</h3>" +
+			"<h2>1.0.4更新：</h2><h3>2016年十二月</h3>" +
 				"<h3>更新了GUI</h3>" +
 					"<p>&emsp調整了字體顏色以及字號，使文字更容易閱讀。<p>" +
 				"<h3>新增了「新特性」窗口</h3>" +
@@ -55,16 +58,18 @@ public class fm {
 					"<p>&emsp新增了日語模式，適合更多用戶使用。<p>" +
 				"<h3>修復了漏洞</h3>" +
 					"<p>&emsp調整了組件平移算法。<p>"+
-			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
-		{"JFrameMaker++ Alpha1.0.4","JButton","JLabel","JTextField","JTextArea","JCheckBox"
+			"<center><br><h5>Copyright © 2019 JisamWONG's Original Software. <br>All rights reserved.</h5></center></html>"},
+		{"JFrameMaker++ Alpha1.0.5","JButton","JLabel","JTextField","JTextArea","JCheckBox"
 			,"  OK  ","Massage","Name of Component","Add to JFrame","The name cannot be empty","invalid name"
-			,"======Click here for more Information======","Access Failed","General","Bold","Italic","Bold both Italic"
+			,"====Click here for more Information====","Access Failed","General","Bold","Italic","Bold both Italic"
 			,"Text Abscissa Ordinate Width Height Font_Name Font_Style Font_Size Red Green Blue","Copy the code","Copied to your clipboard"
 			,"Setting","Hide","Exit","Add","Settings","See code","Refresh","Language","Feeling","JFrame's title"
 			,"Classical light","Modren Deep","Save changes","  Cancle  "
 			,"To save your settings, you need to restart JFrameMaker++. \nAre you sure you want to log out temporarily?"
 			,"Choose a component","What's new"
-			,"<html><h2>1.0.4 Updated: </h2><h3>October 2016</h3>"+
+			,"<html><h2>1.0.5 Updated: </h2><h3>December 2019</h3>" +
+				"<h3>Made some minimal updates. </h3>" +
+			"<h2>1.0.4 Updated: </h2><h3>December 2016</h3>"+
 				"<h3> Updated GUI </h3>" +
 					"<p> &emsp Adjusted the font color to make the text easier to read. <p>" +
 				"<h3> Window \"What's new\" added </h3>" +
@@ -72,21 +77,23 @@ public class fm {
 					"and the <br>&emsp updations of previous versions.</p><br>" +
 				"<h3>Strengthened the limit about Components' name</h3>" +
 					"<p>&emsp This restricts the component name to a naming convention. </p><br>" +
-			"<h2>1.0.3 Updated: </h2><h3>October 2016</h3>" +
+			"<h2>1.0.3 Updated: </h2><h3>December 2016</h3>" +
 				"<h3>Language department updated </h3>" +
 					"<p>&emsp Japanese added to fit more users. <p>" +
 				"<h3>Debugged</h3>" +
 					"<p>&emsp The components translation algorithm was adjusted. <p>"+
-			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"},
-		{"JFrameMaker++ アルファ1.0.4","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
+			"<center><br><h5>Copyright © 2019 JisamWONG's Original Software. <br>All rights reserved.</h5></center></html>"},
+		{"JFrameMaker++ アルファ1.0.5","ボタン", "ラベル", "テキストフィールド","テキスト領域","チェックボックス"
 			,"  OK  ","マッサージ","コンポーネントの名前","JFrameに追加","名前は空ではありません","重複コンポーネント名"
-			,"=============詳細情報=============", "アクセス失敗", "一般", "ボールド","イタリック", "太字と斜体"
+			,"======詳細情報======", "アクセス失敗", "一般", "ボールド","イタリック", "太字と斜体"
 			, "テキスト 緯度 経度 幅 高さ フォント名 フォントスタイル フォントサイズ 赤 緑 青","コードのコピー","クリップボードにコピーされた"
 			,"設定","隠す","終了","追加","設定","コードを参照","リフレッシュ","言語","スタイル","JFrameのタイトル"
 			,"クラシックライト", "モドレンディープ","変更を保存","キャンセル"
 			,"設定を保存するには、JFrameMaker ++を再起動する必要があります。\n一時的にログアウトしてもよろしいですか？"
 			,"コンポーネントを選択","新機能"
-			,"<html><h2>バージョン1.0.4：</h2><h3>2016年12月</h3>" +
+			,"<html><h2>バージョン1.0.5：</h2><h3>2019年12月</h3>" +
+				"<h3>いくつかの小さな更新を行いました。</h3>" +
+			"<h2>バージョン1.0.4：</h2><h3>2016年12月</h3>" +
 				"<h3>更新されたインターフェイス</h3>" +
 					"<p>&emspフォントの色やフォントサイズを調整し、読みテキストが容易になります。<p>" +
 				"<h3>追加された「新機能」ウィンドウ</h3>" +
@@ -99,7 +106,7 @@ public class fm {
 					"<p>&emspより多くのユーザーのために、日本語を追加しました。<p>" +
 				"<h3>デバッグされた</h3>" +
 					"<p>&emspコンポーネントの移動アルゴリズムが調整されました。<p>"+
-			"<center><br><h5>Copyright © 2016 WangYixin's Original Software. <br>All rights reserved.</h5></center></html>"}
+			"<center><br><h5>Copyright © 2019 JisamWONG's Original Software. <br>All rights reserved.</h5></center></html>"}
 		};
 	
 	fm() throws Exception{
@@ -116,7 +123,7 @@ public class fm {
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frm.setLayout(null);
 		frm.setUndecorated(true);
-		frm.setIconImage(ImageIO.read(this.getClass().getResource("/data/ICO.png")));
+		//frm.setIconImage(ImageIO.read(this.getClass().getResource("/data/ICO.png")));
 		//============================
 		Title=new JPanel();
 		Title.setBounds(0,0,frm.getWidth(),45);
@@ -125,7 +132,7 @@ public class fm {
 		Title.setLayout(null);
 		//============================
 		JLabel title=new JLabel(langus[languChooser][0]);
-		title.setFont(new Font("PMingLiU",0,20));
+		//title.setFont(new Font("PMingLiU",0,20));
 		title.setForeground(colors[colorChooser][1]);
 		title.setBounds(10,5,380,30);
 		Title.add(title);
@@ -138,7 +145,7 @@ public class fm {
 		conPanel.add(con1);
 		JLabel label=new JLabel(langus[languChooser][8],JLabel.CENTER);
 		label.setForeground(colors[colorChooser][1]);
-		label.setFont(new Font("PMingLiU",0,14));
+		//label.setFont(new Font("PMingLiU",0,14));
 		conPanel.add(label);
 		final JTextField con2=new JTextField();
 		conPanel.add(con2);
@@ -177,10 +184,10 @@ public class fm {
 		conPanel.add(con3);
 		conPanel.add(new JLabel());
 		final JLabel con4=new JLabel(langus[languChooser][12],JLabel.CENTER);
-		con4.setFont(new Font("PMingLiU",0,15));
+		//con4.setFont(new Font("PMingLiU",0,15));
 		con4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		conPanel.add(con4);
-		conPanel.add(new JLabel("<html><center>Copyright © 2016 WangYixin's Original Software. " +
+		conPanel.add(new JLabel("<html><center>Copyright © 2019 JisamWONG's Original Software. " +
 				"</br>All rights reserved.</center></html>"));
 		con4.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
@@ -245,7 +252,7 @@ public class fm {
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 		label=new JLabel(langus[languChooser][36],JLabel.CENTER);
 		label.setForeground(colors[colorChooser][1]);
-		label.setFont(new Font("PMingLiU",0,14));
+		//label.setFont(new Font("PMingLiU",0,14));
 		setPanel.add(label);
 		setPanel.add(set1);
 		
@@ -261,25 +268,25 @@ public class fm {
 		set10=new JSlider(0,255,0);
 		set11=new JSlider(0,255,0);
 		set12=new JSlider(0,255,0);
-	    
+		
 		SET=new JComponent[]{set2,set3,set4,set5,set6,set7,set8,set9,set10,set11,set12};
 		String[] items=langus[languChooser][18].split(" ");
 		for(int i=0;i<SET.length;i++){//添加組件到設定介面
-	    	SET[i].setEnabled(false);
-	    	label=new JLabel(items[i],JLabel.CENTER);
-	    	label.setForeground(colors[colorChooser][1]);
-	    	label.setFont(new Font("PMingLiU",0,14));
-	    	setPanel.add(label);
+			SET[i].setEnabled(false);
+			label=new JLabel(items[i],JLabel.CENTER);
+			label.setForeground(colors[colorChooser][1]);
+			//label.setFont(new Font("PMingLiU",0,14));
+			setPanel.add(label);
 			setPanel.add(SET[i]);
 			label=null;
 			if(i!=0)SET[i].setOpaque(false);
-	    }
+		}
 		
 		set2.addKeyListener(new KeyAdapter(){
-		    public void keyReleased(KeyEvent e) {
-		    	comPointer.setText(set2.getText());
-		    }
-	    });
+			public void keyReleased(KeyEvent e) {
+				comPointer.setText(set2.getText());
+			}
+		});
 		
 		//文本 橫坐標 縱坐標 寬 高 字體名稱 字體風格 字號 紅 綠 藍
 		set3.addChangeListener(new ChangeListener() {
@@ -432,7 +439,7 @@ public class fm {
 		cod.setBounds(5,5,290,frm.getHeight()-130);
 		cod1=new JTextArea();
 		cod1.setEditable(false);
-		cod1.setFont(new Font("DialogInput",0,13));
+		//cod1.setFont(new Font("DialogInput",0,13));
 		cod1.setSelectionColor(new Color(190,190,190));
 		cod1.setSelectedTextColor(colors[colorChooser][6]);
 		cod1.setBackground(colors[colorChooser][5]);
@@ -473,7 +480,7 @@ public class fm {
 		frm.add(Tools);
 		//============================
 		final JLabel bigSetButton=new JLabel(langus[languChooser][21],JLabel.CENTER);
-		bigSetButton.setFont(new Font("PMingLiU",0,20));
+		//bigSetButton.setFont(new Font("PMingLiU",0,20));
 		bigSetButton.setOpaque(true);
 		bigSetButton.setBackground(null);//設定按鈕顏色
 		bigSetButton.setBounds(frm.getWidth()-165,0,55,45);
@@ -493,7 +500,7 @@ public class fm {
 		Title.add(bigSetButton);
 		//============================
 		final JLabel minButton=new JLabel(langus[languChooser][22],JLabel.CENTER);
-		minButton.setFont(new Font("PMingLiU",0,20));
+		//minButton.setFont(new Font("PMingLiU",0,20));
 		minButton.setOpaque(true);
 		minButton.setBackground(null);//隱藏按鈕顏色
 		minButton.setBounds(frm.getWidth()-110,0,55,45);
@@ -512,7 +519,7 @@ public class fm {
 		Title.add(minButton);
 		//============================
 		final JLabel closeButton=new JLabel(langus[languChooser][23],JLabel.CENTER);
-		closeButton.setFont(new Font("PMingLiU",0,20));
+		//closeButton.setFont(new Font("PMingLiU",0,20));
 		closeButton.setOpaque(true);
 		closeButton.setBackground(null);//離開按鈕顏色
 		closeButton.setBounds(frm.getWidth()-55,0,55,45);
@@ -534,7 +541,7 @@ public class fm {
 		final JLabel setButton=new JLabel(langus[languChooser][25],JLabel.CENTER);
 		final JLabel codButton=new JLabel(langus[languChooser][26],JLabel.CENTER);
 		//============================
-		conButton.setFont(new Font("PMingLiU",0,15));
+		//conButton.setFont(new Font("PMingLiU",0,15));
 		conButton.setOpaque(true);
 		conButton.setBackground(colors[colorChooser][2]);//按鈕顏色
 		conButton.setForeground(colors[colorChooser][1]);
@@ -548,21 +555,21 @@ public class fm {
 				card.show(Tools, "con");
 			}
 			public void mouseEntered(MouseEvent e) {
-				conButton.setFont(new Font("PMingLiU",0,16));
+				//conButton.setFont(new Font("PMingLiU",0,16));
 			}
-		    public void mouseExited(MouseEvent e) {
-		    	conButton.setFont(new Font("PMingLiU",0,15));
-		    }
-		    public void mousePressed(MouseEvent e) {
-		    	conButton.setForeground(colors[colorChooser][3]);
-		    }
-		    public void mouseReleased(MouseEvent e) {
-		    	conButton.setForeground(colors[colorChooser][1]);
-		    }
+			public void mouseExited(MouseEvent e) {
+				//conButton.setFont(new Font("PMingLiU",0,15));
+			}
+			public void mousePressed(MouseEvent e) {
+				conButton.setForeground(colors[colorChooser][3]);
+			}
+			public void mouseReleased(MouseEvent e) {
+				conButton.setForeground(colors[colorChooser][1]);
+			}
 		});
 		frm.add(conButton);
 		//============================	
-		setButton.setFont(new Font("PMingLiU",0,15));
+		//setButton.setFont(new Font("PMingLiU",0,15));
 		setButton.setOpaque(true);
 		setButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 		setButton.setForeground(colors[colorChooser][1]);
@@ -576,21 +583,21 @@ public class fm {
 				card.show(Tools, "set");
 			}
 			public void mouseEntered(MouseEvent e) {
-				setButton.setFont(new Font("PMingLiU",0,16));
+				//setButton.setFont(new Font("PMingLiU",0,16));
 			}
-		    public void mouseExited(MouseEvent e) {
-		    	setButton.setFont(new Font("PMingLiU",0,15));
-		    }
-		    public void mousePressed(MouseEvent e) {
-		    	setButton.setForeground(colors[colorChooser][3]);
-		    }
-		    public void mouseReleased(MouseEvent e) {
-		    	setButton.setForeground(colors[colorChooser][1]);
-		    }
+			public void mouseExited(MouseEvent e) {
+				//setButton.setFont(new Font("PMingLiU",0,15));
+			}
+			public void mousePressed(MouseEvent e) {
+				setButton.setForeground(colors[colorChooser][3]);
+			}
+			public void mouseReleased(MouseEvent e) {
+				setButton.setForeground(colors[colorChooser][1]);
+			}
 		});
 		frm.add(setButton);
 		//============================
-		codButton.setFont(new Font("PMingLiU",0,15));
+		//codButton.setFont(new Font("PMingLiU",0,15));
 		codButton.setOpaque(true);
 		codButton.setBackground(colors[colorChooser][0]);//按鈕顏色
 		codButton.setForeground(colors[colorChooser][1]);
@@ -617,17 +624,17 @@ public class fm {
 				card.show(Tools, "cod");
 			}
 			public void mouseEntered(MouseEvent e) {
-				codButton.setFont(new Font("PMingLiU",0,16));
+				//codButton.setFont(new Font("PMingLiU",0,16));
 			}
-		    public void mouseExited(MouseEvent e) {
-		    	codButton.setFont(new Font("PMingLiU",0,15));
-		    }
-		    public void mousePressed(MouseEvent e) {
-		    	codButton.setForeground(colors[colorChooser][3]);
-		    }
-		    public void mouseReleased(MouseEvent e) {
-		    	codButton.setForeground(colors[colorChooser][1]);
-		    }
+			public void mouseExited(MouseEvent e) {
+				//codButton.setFont(new Font("PMingLiU",0,15));
+			}
+			public void mousePressed(MouseEvent e) {
+				codButton.setForeground(colors[colorChooser][3]);
+			}
+			public void mouseReleased(MouseEvent e) {
+				codButton.setForeground(colors[colorChooser][1]);
+			}
 		});
 		frm.add(codButton);
 		//============================
@@ -656,7 +663,7 @@ public class fm {
 		setFrame.setLayout(new GridLayout(8,1,5,5));
 		
 		setFrame.add(new JLabel(langus[languChooser][28]));
-		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(中國)","English(US&UK)","日本語(日本)"});
+		final JComboBox<String> langu=new JComboBox<String>(new String[]{"中文(台灣&香港)","English(US&UK)","日本語(日本)"});
 		langu.setSelectedIndex(languChooser);
 		setFrame.add(langu);
 		langu.addItemListener(new ItemListener() {
@@ -727,7 +734,7 @@ public class fm {
 		seeFrame.setLocationRelativeTo(null);
 		seeFrame.setLayout(new GridLayout(1,1));
 		JLabel label=new JLabel(langus[languChooser][38]);
-		label.setFont(new Font("PMingLiU",0,15));
+		//label.setFont(new Font("PMingLiU",0,15));
 		JScrollPane Sp=new JScrollPane(label);
 		seeFrame.add(Sp);
 		seeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -778,11 +785,11 @@ public class fm {
 		desk.add(f);
 		f.setVisible(true);
 		f.addComponentListener(new ComponentAdapter() {
-		    public void componentMoved(ComponentEvent e) {
-		    	f.setLocation(30, 30);
-		    }
-		    public void componentResized(ComponentEvent e) {
-		    	set3.setMaximum(f.getWidth()-10);
+			public void componentMoved(ComponentEvent e) {
+				f.setLocation(30, 30);
+			}
+			public void componentResized(ComponentEvent e) {
+				set3.setMaximum(f.getWidth()-10);
 				set4.setMaximum(f.getHeight()-35);
 				if(comPointer!=null){
 					set3.setMaximum(f.getContentPane().getWidth()-comPointer.c.getWidth());
@@ -793,19 +800,19 @@ public class fm {
 					set5.setMaximum(f.getContentPane().getWidth());
 					set6.setMaximum(f.getContentPane().getHeight());
 				}
-		    }
+			}
 		});
 		f.addMouseListener(new MouseAdapter() {
-		    public void mouseReleased(MouseEvent e) {
-		    	for(int i=0;i<set1.getItemCount();i++){
+			public void mouseReleased(MouseEvent e) {
+				for(int i=0;i<set1.getItemCount();i++){
 					com c=com.get(set1.getItemAt(i).split(" ")[1]);
 					if(c.c.getX()>=f.getWidth()||c.c.getY()>=f.getHeight()||c.c.getX()+c.c.getWidth()<=0||c.c.getY()+c.c.getHeight()<=0
-			    			||c.c.getWidth()<=0||c.c.getHeight()<=0){
+							||c.c.getWidth()<=0||c.c.getHeight()<=0){
 						f.setCursor(Cursor.getPredefinedCursor(0));
-			    		c.destory();
-			    	}
+						c.destory();
+					}
 				}
-		    }
+			}
 		});
 	}
 }
