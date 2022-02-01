@@ -1,2 +1,2 @@
-# JFM卄_Alpha
-JFrameMaker的升級款，內置型可視化編輯窗口。
+# JFM_plus_Alpha
+An updated version of JFrameMaker, with overhauled workflow and UI design.
